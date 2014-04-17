@@ -1,0 +1,403 @@
+
+\begin{quote}
+ It is all about parallel transport along \emph{curves}.
+\end{quote} John Baez in \cite{baez-2004}
+
+\bigskip
+\bigskip
+
+Unless when cited, the definitions and results here can be found in \cite{kobayashi1} and \cite{husemoller}.
+
+\section{Bundles}
+
+\begin{definition}
+ A \define{bundle} is a triple $\xi=(E,p,B)$ where $p:E\rightarrow B$ is a (continuous) map. We call $B(\xi)=B$ the \define{base space}, $E(\xi)=E$ the \define{total space} and $p$ the \define{projection of the bundle}. One has naturally \define{products of bundles} $(E\times E',p\times p',B\times B')$ and \define{subbundles} $(E',p,B')\subset (E,p,B)$ every time $E'\subset E$ and $B'\subset B$. We call a map $s:B\rightarrow E$ a \define{cross-section} if $p\circ s=\text{id}_B$.
+\end{definition}
+
+\begin{example}The \define{trivial bundle} $(B\times F,\pi,B)$ where $\pi:B\times F\rightarrow B$ is the projection.
+\end{example}
+
+
+\begin{definition}
+ A pair of maps $u:E\rightarrow E'$ and $f:B\rightarrow B'$ is said to be a \define{bundle morphism} of the bundles $\xi=(E,p,B)$ and $\eta=(E',p',B')$ when the following diagram commutes:
+\[
+ \xymatrix{E\ar[r]^u \ar[d]^p & E'\ar[d]^{p'}\\
+B\ar[r]^f & B'}
+\]
+When $B'=B$, a \define{bundle morphism over $B$} is a map $u:E\rightarrow E'$ such that the following commutes:
+\[
+ \xymatrix{E\ar[rr]^u \ar[dr]^p &  & E' \ar[dl]^{p'} \\ & B & }
+\]
+The set of bundles together with the set of bundle morphisms form a category, denoted $\mathbf{Bun}$. This category restricts to the category $\mathbf{Bun_B}$ of bundles over $B$ together with bundle morphisms over $B$, for any space $B$.
+
+Note that from the categorical setting, one obtains the notion of \define{bundle isomorphism}.
+
+When $\xi=(E,p,B)$ is such that each \define{fibre} $p^{-1}(x)$ is homeomorphic to a space $F$, $\xi$ is said to be a \define{bundle with fibre $F$}. In particular, when $\xi \approx B\times F$ we call it the \define{trivial bundle over $B$}.
+
+ For $A\subset B$, the bundle $\eta=(p^{-1}(A),p,A)$ is said to be the \emph{restriction} of $\xi =(E,p,B)$ to $A$\index{restriction of a bundle} \label{restrict} and is denoted \define{$\xi_{|A}$}. This is a particular case of the following: given $\xi=(E,p,B)$ and a map $f:B'\rightarrow B$, one gets a bundle over $B'$, the \define{induced bundle of $\xi$ over $f$} (or \define{pullback}) and denoted \define{$f^*(\xi)$} with:\begin{itemize}
+     \item $E(f^*(\xi))=\{(b',x)\in B'\times E:f(b')=p(x)$ \}
+    \item $p'(b',x)=b'$                                                                                                                                                                                                                                                                                                                                                                                                     \end{itemize}
+The fibre product of the bundles $\xi_1=(E_1,p_1,B)$ and $\xi_2=(E_2,p_2,B)$ over $B$ is $(E_1\oplus E_2,p,B)$ where \[
+                                                                                                                      E_1\oplus E_2=\{ (x,x')\in E_1\times E_2: p_1(x)=p_2(x') \}
+                                                                                                                     \]
+and $p(x,x')=p_1(x)=p_2(x')$.
+
+
+The bundles $\xi$ and $\eta$ over $B$ are said to be \define{locally isomorphic} if
+\[
+ \forall_{x\in B} \exists_{U\ni x \text{ open}} : \xi_{|U}\approx \eta_{|U}
+\]
+If $\xi$ is locally isomorphic to $(B\times F,p,B)$ for a certain space $F$, it is said to be a \define{locally trivial bundle with fibre $F$} (recall that local isomorphism is an equivalence relation).
+\end{definition}
+
+% \begin{definition}
+%  A \define{topological group} is a group $G$ with a topology such that the following maps are continuous:
+% \begin{align*}
+%  G\times G &\rightarrow G   &G&\rightarrow G \\
+% (g,h)&\mapsto gh  &g&\mapsto g^{-1} 
+% \end{align*}
+% For such $G$, a (right) $G$-space $X$ is a space together with a map $X\times G\rightarrow X$ such that
+% \begin{align*}
+%  x(st)&=(xs)t \qquad \forall x\in X \text{ and } s,t\in G\\
+% x1&=x \qquad \forall x\in X
+% \end{align*}
+% A map $f:X\rightarrow Y$ between $G$-spaces is a \define{$G$-morphism} if
+% \[
+%  f(xg)=f(x)g \quad \forall x\in X,g\in G
+% \]
+% \end{definition}
+% \improve{continue!}
+% \begin{definition}
+%  A principal $G$-bundle is a $G$-bundle $(X,p,B)$ where $G$ acts effectively on $X$\footnote{that is, $xs=x$ implies $s=1$, or equivalently $xs=xt$ implies $s=t$} and \ldots
+% \end{definition}
+% \improve{nao ha uma definicao mais simpatica aqui?}
+
+\begin{definition} Let $B$ be a manifold, and let $G$ Lie group. A \define{(differentiable, locally trivial) principal fibre bundle over $B$ with group $G$}\footnote{we often omit differentiability and local triviality} is a locally trivial bundle $(E,p,B)$ with fibre $G$ where:
+\begin{itemize}
+ \item $G$ acts freely on $E$,
+\item $B$ is the quotient space of $P$ by the equivalence relation induced by $G$,
+\item the canonical projection $\pi:E\rightarrow B$ is differentiable.
+\end{itemize}
+\end{definition}
+By local triviality, one has a covering $\{U_{\alpha} \}_\alpha$ of $B$ where the isomorphisms $p^{-1}(U_\alpha)\approx U_\alpha\times G$ induce natural mappings \begin{equation}
+                                               g_{\alpha\beta}:U_{\alpha\beta}\rightarrow G
+                                              \end{equation}
+the \define{transition functions} associated to the cover $\{U_{\alpha} \}_\alpha$. These obey the cocycle condition
+\begin{equation}\label{cycle}
+  g_{\alpha\gamma}(x)=g_{\alpha\beta}(x)g_{\beta\gamma}(x),\qquad x\in U_{\alpha\beta\gamma}
+\end{equation}
+
+
+Conversely, given a cover $\{U_{\alpha} \}_\alpha$ of $B$ and functions $g_{\alpha\beta}:U_{\alpha\beta}\rightarrow G$ obeying (\ref{cycle}), we can construct a principal bundle over $M$ with group $G$ with such transition functions. 
+
+\begin{example}[Line bundles]
+ A \define{complex line bundle}\footnote{Other authors define a line bundle as a complex vector bundle of rank 1.} (or simply \define{line bundle}) on a connected, smooth manifold $M$ is a principal $S^1$\footnote{The unitary vectors in $\mathbb{C}$}-bundle over $M$.
+
+ The equivalence classes of complex line bundles over $M$ are in bijective correspondence with the first \v{C}ech cohomology group $\check{H}^1(M,\underline{S^1}_B)$, where $\underline{S^1}_M$ denotes the sheaf of smooth $G$ valued functions on opens of $M$. This defines a group isomorphism (where cochains are multiplied pointwise, and the bundles by their tensor product).
+\end{example}
+
+
+\subsection{The associated and reduced bundles}
+
+\begin{definition}
+ \index{Morphism of principal bundles} A morphism from a principal $G'$ bundle $(E',p',B')$ to a principal $G$ bundle $(E,p,B)$ is a pair $f=(f',f'')$ where $f':E'\rightarrow E$ is a bundle morphism and $f'':G'\rightarrow G$ is a homomorphism such that $ f'(u'g')= f'(u')f''(g')$ for all $u\in E',g\in G'$. It is said to be an \define{imbedding} if $f:E'\rightarrow E$ is an embedding and $f:G'\rightarrow G$ is a monomorphism. In this case $(E',p',B')$ is said to be a \define{subbundle} of $(E,p,B)$. If also $B=B'$ and the induced mapping $f:B'\rightarrow B$ is the identity, $f$ is said to be a \define{reduction of the structure group} $G$ to $G'$, and the bundle $(E',p',B')$ is the \define{reduced bundle}.
+\end{definition}
+
+\begin{prop}\label{redprop}
+A principal bundle has a reduction of the structure group from $G$ to $H$ if and only if it has (local trivializations with) transition functions with values in $H$.
+\end{prop}
+
+\begin{definition}
+ Let $\xi=(E,p,B)$ be a a principal $G$-bundle, and $F$ a space with a left $G$ action. The \define{associated bundle} of $\xi$ with fibre $F$, denoted $\xi[F]$, is defined as follows:
+$G$ acts on $E\times F$ with each $g\in G$ mapping $(x,f)\mapsto (xg,g^{-1}f)$. The \emph{total space} is then $E\times_G F$, the quotient of $E\times F$ by the action of $G$. It has a projection $p_F$ to $B$ induced by $E\times F\ni(x,f)\mapsto p(x)$. If $U\subset B$ trivializes $\xi$, i.e. $p^{-1}(U) \approx U\times G$, then $g\in G$ acts on $U\times G\times F$ by \[
+(x,h,f)\mapsto (x,hg,g^{-1}f)                                                                                      \]
+This induces a bijection $p^ {-1}_F(U)\approx U\times F$, and we introduce a differentiable structure on $E\times_G F$ by requiring $p_F^{-1}(U)$ to be open and diffeomorphic to $U\times F$.
+A \define{vector bundle} is then an associated bundle with fibre $F^n$, where $F=\mathbb{R}$ or $\mathbb{C}$, and structure group $GL(n,F)$.
+\end{definition}
+
+Similarly one defines \define{morphisms of vector bundles} as bundle morphisms that are linear on the fibres, and say they are monomorphisms (respectively epimorphisms) if they are monomorphisms (resp. epimorphisms) on each fibre.
+
+The following is a result we will later need for section \ref{existence}, and can be found in \cite[p.37]{husemoller}.
+\begin{theorem}\label{exactseq}
+ Let $\xymatrix{0\ar[r]&\xi\ar[r]^u & \eta \ar[r]^v &\chi \ar[r] & 0}$ be a short exact sequence of vector bundles over $B$. Then there is a morphism $w:\xi\oplus\chi \rightarrow \eta$ such that the following diagram commutes:
+\[
+ \xymatrix{ & &\eta\ar[dr]^v & & \\
+0\ar[r]&\xi\ar[ur]^u \ar@{^{(}->}[dr] & &\chi\ar[r] & 0\\
+&&\xi\oplus\chi\ar[uu]^w \ar[ur]&&}
+\]
+\end{theorem}
+While principal bundles are trivial if and only if they have a section, vector bundles always have the zero section. 
+%The inclusion morphism above is given on the right by the zero section of vector bundles. 
+
+\section{Connections on principal bundles}
+\subsection{Left invariance}
+
+Let $G$ be a Lie group, and denote $e$ its identity. $R_g:G\rightarrow G$ is the right multiplication $h\mapsto hg$, $L_g$ the left multiplication, and \begin{align*}
+ad_g:G\rightarrow G\\
+h\mapsto ghg^{-1}                                                                                                                                                                                                                \end{align*}
+with derivative in the identity $Ad_g\equiv d(ad_g):\mathfrak{g}\rightarrow \mathfrak{g}$. This defines the \define{adjoint representation of $G$}\begin{align*}                                                                                                                                          
+Ad:G\rightarrow \text{Aut }\mathfrak{g}                                                                                                                                                         \end{align*}
+By taking the derivative at the identity we get a map $Ad :\mathfrak{g}\rightarrow \text{Der }\mathfrak{g}$, the \define{adjoint representation of $\mathfrak{g}$}.
+
+
+A vector field $X\in \mathfrak{X}(G)$ is said to be left-invariant if $(d L_g)X_h=X_{gh}$. The set of left invariant vector fields in $G$ is isomorphic to $\mathfrak{g}=T_e G$ under the correspondence\begin{align*}
+\mathfrak{g}\ni X &\mapsto (h\mapsto (dL_h)X)
+\end{align*}
+
+Much like left invariant vector fields, left invariant forms are uniquely determined by their values in $e$. The canonical $\mathfrak{g}$-valued left invariant form on $G$ is the \define{Maurer-Cartan} form:
+\begin{equation}\label{maurercartan}
+\theta_g(v)=(L_{g^{-1}})_*v
+\end{equation}
+
+
+Let $(E,\pi,B)$ be a principal $G$-bundle. The \define{vertical tangent space} of $E$ at $p\in E$, or \define{$V_p E$} is $ker(d_p \pi)\subset T_p E$.
+%,or equivalently $T_p(E_{\pi(p)})$.
+%%\improve{prove $T_p(B_{\pi(p)})=ker(d\pi)$} 
+Also, for all $p$, there is an isomorphism
+
+\begin{align*}
+ \#:\mathfrak{g}\cong T_e G&\rightarrow V_p E\\
+[c(t)]&\mapsto [p.c(t)]\\
+\end{align*}
+
+It is defined in $V_p E$ since $p.c(t)$ is in $E_{\pi(p)}$ at all times, so $\pi(p.c(t))=\pi(p)$ is constant and therefore
+\[
+ (d_p\pi)([p.c(t)])=\frac{d}{dt}_{|t=0}(\pi(p.c(t)))=0
+\]
+
+So given $A\in\mathfrak{g}$ and $p\in E$ we get a vector $A^{\#}_p\in V_p E$, and consequently a vector field $A^\#\in \mathfrak{X}(E)$, the \define{fundamental vector field} generated by $A$. The main property of this field is that, for each $g\in G$,\begin{equation}\label{mainproperty}
+                    (ad_{g^{-1}}A)^\#   =(R_g)_*A^{\#}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            \end{equation}
+
+\subsection{Connections} 
+
+Recall that a $k$-dimensional distribution on a manifold $B$ is a map
+\[
+B\ni x \mapsto D_x \subset T_x B,
+\]
+where $D_x$ is a k-dimensional vector subspace of $T_x B$ for every $x\in B$. $C^\infty$ distributions are those such that every $x$ has a neighbourhood $U$ where $D_x$ is generated by $k$ smooth vector fields $X_1,\ldots,X_k\in \mathfrak{X}(U)$ \[
+D_x=<X_1,\ldots,X_k>                                                                                                                                                   \]
+
+% \begin{definition}
+% \improve{rewrite in other words, or separate definition, proposition etc}
+% A connection on a principal $G$-bundle $\pi:B\rightarrow M$ is ``usually'' one of the following:
+% \begin{enumerate}
+%  \item (\define{The Ehresmann connection}:) a distribution $H$ in $B$ such that for all $p\in P$
+% 	\begin{enumerate}
+% 	\item H is \define{horizontal}, ie $T_p P=H_p \oplus T_p(B_{\pi(p)})$
+% 	\item H is \define{$G$-invariant}, ie $\forall_{g\in G} H_{ug}=(R_g)_* H_u$, where $R_g:P\rightarrow P$ is the right  multiplication by $g$, $R_g(p)=p.g$.
+% 	\end{enumerate}
+%  \item (\define{the 1-form of the connection}:) A $1$-form $\omega\in \Omega^1(P,\mathfrak{g})$ such that
+% 	\begin{enumerate}
+% 	\item $\omega(X^*)=X$ for all $X\in\mathfrak{g}$;
+% 	\item $(R_g)^*\omega=Ad(g^{-1})\omega$, for all $g\in G$
+% 	\end{enumerate}
+%  \item For a cover $\{U_\alpha\}$ of $M$, a set of $1$-forms $\omega_\alpha\in\Omega^1(U_\alpha,\mathfrak{g})$ such that on every $U_\alpha\cap U_\beta$ \[ 
+%                          i\omega_\alpha-i\omega_\beta=g_{\alpha\beta}^{-1}dg_{\alpha\beta}
+%                                                                                                                                                          \]
+% 
+% \end{enumerate}
+% \end{definition}
+% 
+% REWRITE
+
+A connection on a \emph{principal} $G$-bundle $\pi:E\rightarrow B$ can be defined in many ways. 
+
+\begin{definition}
+A \define{(principal) Ehresmann connection} is a smooth distribution $H$ in $E$ such that for all $p\in E$
+	\begin{enumerate}
+	\item H is \define{horizontal}, i.e. $T_p E=H_p \oplus V_pE$
+	\item H is \define{$G$-invariant}, i.e. $\forall_{g\in G} H_{ug}=(R_g)_* H_u$, where $R_g:E\rightarrow E$ is the right  multiplication by $g$, $R_g(b)=b.g$.
+	\end{enumerate}
+\end{definition}
+
+%% \improve{state that the G-invariance condition ensures that if a point $p$ is parallel transported, so %% is its multiple $pg$, with $g\in G$ fixed}
+
+%% \question{$C^\infty$ distribution required? What about condition on japanese book that the connection  separates any smooth vector field in 2 smooth components (vertical and horizontal)?}
+
+Alternatively we could have defined a connection as a projection $T_p E\rightarrow V_p E\cong \mathfrak{g}$ at each point $p\in E$, or, equivalently, in terms of a connection form as defined below.
+
+\begin{definition}
+A \define{connection one-form} $\omega$ is an element of $\Omega^1(E,\mathfrak{g})\equiv\Omega^1(E)\otimes \mathfrak{g}$ (the one-forms in $E$ with values in $\mathfrak{g}$), such that \begin{enumerate}
+                                                                                                                                                                                         \item $\omega(A^\#)=A$, for all $A\in \mathfrak{g}$
+							\item $R_g^*\omega=Ad_{g^{-1}}\omega$ (ie, $Ad_{g^{-1}}\omega(X)=\omega(d R_g X)$).
+							\end{enumerate}
+\end{definition}
+
+This gives us a connection in the previous sense, as each connection 1-form gives, at each $p\in E$, a projection \[
+                                                                                                              \omega_p:T_p E\rightarrow \mathfrak{g}\cong V_p E
+                                                                                                             \]
+and so we get a decomposition $T_p E=V_p E\oplus ker\omega_p$ which is equivariant.
+
+\begin{prop} Given a connection 1-form $\omega\in\Omega^1(E,\mathfrak{g})$, $H_p=ker(\omega_p)$ is an Ehresmann connection.
+\end{prop}
+
+\begin{proof}
+All that is left to prove is the $G$-invariance: $H_{ug}=(R_{g})_* H_u$. If $X\in H_u$ then $\omega_{ug}(R_{g*}X)=R_g^*\omega(X)=Ad_{g^{-1}}\omega(X)=0$ since $\omega(X)=0$ by definition. Hence $R_{g*}X\in H_{ug}$. Note that $R_{g*}$ is invertible, so any $Y\in H_{ug}$ is of the form $Y=R_{g*}X$, where $X=R_{g^{-1}*}Y\in H_u$ because $Y\in H_{ug}$.
+\end{proof}
+
+Conversely, given an Ehresmann connection one can obtain a connection 1-form.
+
+
+% IGNORE:
+% 
+% Recall that choosing such a decomposition is equivalent to choosing a projection \question{I know why, what is the exact result to just quote?}
+% 
+% \improve{ $L(U,V)$, the set of linear applications from $U$ to $V$, is equal to $V^*\otimes W$, the set of linear functionals in $V$ with values in $W$} in every $p\in B$ $P_p:T_p E\rightarrow (ker d_p\pi)\cong \mathfrak{g}$
+% 
+% This is just a $1$-form $\omega$ with values in $\mathfrak{g}$, ie $\omega\in \Omega^1(E,\mathfrak{g})\equiv\Omega^1(E)\otimes \mathfrak{g}$.
+% 
+% \improve{The following right implication is on the notes, the converse is on koboyashi and the book at home}
+% END IGNORE
+
+Given a trivialization $(\phi_\alpha,U_\alpha)_\alpha$ we obtain a family of sections $s_\alpha(p)=\phi_\alpha(p,e)$ and consequently a  family of 1-forms $\omega_\alpha=(s_\alpha)^*\omega\in \Omega(U_\alpha,\mathfrak{g})$. These 1-forms are such that on every $U_\alpha\cap U_\beta$
+
+\begin{equation}
+\label{compat}
+\omega_\beta = g_{\alpha\beta}^{-1} \omega_\alpha g_{\alpha\beta}+g_{\alpha\beta}^{-1}dg_{\alpha\beta}
+\end{equation}
+
+Conversely, any family of 1-forms $\omega_\beta$ obeying (\ref{compat}) defines a unique connection 1-form $\omega\in\Omega^1(P,\mathfrak{g})$ having these as local 1-forms. 
+
+Note that for line bundles the compatibility equation ($\ref{compat}$) simplifies to
+\begin{equation}
+ \label{compat2} \omega_\beta = \omega_\alpha+g_{\alpha\beta}^{-1}dg_{\alpha\beta}
+\end{equation}
+
+
+% Also \begin{align}
+%                                                                           \mathfrak{g} &\rightarrow^{\cong} ker(d_p\pi)\\
+% 									  v=[c(t)]\mapsto [p.c(t)]
+%                                                                              \end{align}
+ 
+                                                                                                                                                                                                            
+                                                                                                                                
+
+
+%%Each provides a choice of the horizontal tangent space of the bundle, ie, a complement of %%$ker(d\pi)=T_p(B_{\pi(p)$\improve{Exercice: prove this equality} in $T_p P$.
+
+\subsection{Curvature} Recall that the \define{curvature of the connection} (1-form) $\omega$ is defined as the exterior covariant derivative $D\omega$, or more precisely,\[
+\Omega(X,Y)=d\omega(X^H,Y^H)   , \qquad X,Y\in \mathfrak{X}(E)       \]
+where $\xymatrix{V\ar[r]^H & V^H}$ gives the \emph{horizontal} component of the vector $V$.
+This 2-form is equivariant, that is \[ R_g^* (\Omega)=g^{-1}\Omega g, \qquad g\in G. \]
+
+$\Omega$ and $\omega$ are related for instance by the \define{Cartan structure equation} \[
+                                                                          d\omega(X,Y)+[\omega(X),\omega(Y)]=\Omega(X,Y), \qquad X,Y\in \mathfrak{X}(B) 
+                            \]
+and the Bianchi identity \[
+                          D\Omega=d\Omega (H\times H\times H)=0
+                         \]
+
+\future{\improve{Draw Prof. Granja sketch, japanese book page 376, and also see GD page 192}}
+
+\future{\improve{flat connection = tem curvatura nula}}
+
+\future{\improve{Wikipedia: there is a canonical flat connection on any flat vector bundle (i.e. a vector bundle whose transition functions are all constant) which is given by the exterior derivative in any trivialization.}}
+
+\subsection{Lifting and holonomy}
+
+Given a principal $G$-bundle $p:E\rightarrow M$ with connection $\omega$, there is a unique map \begin{align*}
+\mathfrak{X}(M)&\rightarrow \mathfrak{X}(E)\\
+X &\mapsto \widetilde{X} 
+\end{align*}
+
+of vector fields (the \define{horizontal lift}), such that \begin{itemize}
+                                                             \item $\pi_*(\widetilde{X})=X$, for every $X\in\mathfrak{X}(M)$
+							     \item $\widetilde{X}_u\in T^H_u E$ at every $u\in E$.
+                                                            \end{itemize}
+This lift is $G$-invariant. That is, $(R_g)_*\widetilde{X}_e=\widetilde{X}_{eg}$ for every $g\in G$.
+
+
+Recall that given a loop $\gamma$ in $M$ and a point $u\in E$ over the basepoint of $\gamma$, there is a path $\tilde{\gamma}$ in $E$ such that $\tilde{\gamma}(0)=u$ and the tangent vector of the curve at every point is horizontal. Moreover, fixing $\gamma$ with $\gamma(0)=\gamma(1)=x\in M$, there is a unique smooth correspondence (called the \define{parallel transport})
+\[ \mathcal{H}_\omega : [0,1]\times E_x\rightarrow E \]
+such that $\frac{d}{dt}\mathcal{H}_\omega (t,u)=\widetilde{\frac{d}{dt}\gamma(t)}$ and $\mathcal{H}_\omega(0,u)=u$. We also write $\mathcal{H}_\omega(\gamma,t,u)=\mathcal{H}_\omega(t,u)$.
+
+This correspondence is  equivariant, i.e. $\mathcal{H}_\omega(\gamma,t,ug)=\mathcal{H}_\omega(\gamma,t,u)g$.
+ Notice that if $u\in p^{-1}(x)$, then also $\mathcal{H}_\omega(1,u) \in p^{-1}(x)$. This way we get a correspondence 
+\begin{align*}
+ \Omega(M)\rightarrow G
+\end{align*}
+that to a loop $\gamma$ in $M$ associates the only $g\in G$ such that $\widetilde{\gamma}(0)=\widetilde{\gamma}(1)g$. 
+
+We call this map the \define{holonomy} (at $u$) of the connection $\omega$. Its image is a subgroup \index{$\text{Hol}$} $\text{Hol}(u)\subset G$, the \define{holonomy group of $\omega$ with reference point $u$}. We often ignore its dependence on $u$ since \begin{itemize}
+\item the holonomy groups are \emph{conjugate} in $G$: if $v=ug$ then $\text{Hol}(v)=ad(g^{-1})\cdotp\text{Hol}(u)$,
+\item any two points which are joined by an horizontal curve, have the same holonomy group.                                                                                                                                                                                                                                                          \end{itemize}
+
+
+
+Let \define{$E(u)$} denote the set of points in $E$ that are connected to $u$ by an horizontal path.
+\begin{theorem}[Reduction theorem]\index{Reduction theorem}\label{redthm}
+$E(u)$ is a reduced bundle with structure group $\text{Hol }(u)$.
+\end{theorem}
+
+\future{\improve{WAIT until read Picken's categorical holonomy}}
+
+\begin{theorem}[Ambrose-Singer]\label{ambrosesinger}
+$\text{Hol(u)}$ is a Lie subgroup of $G$ with Lie algebra equal to the subspace of $\mathfrak{g}$ generated by the image of $\Omega_v$, the curvature form at all points $v\in E(u)$.
+\end{theorem}
+
+% \begin{lemma}
+%  Let $\phi$ be a \define{smooth family of curves}, i.e. a map assigning to each $s\in [0,1]$ a curve $\gamma_s$ such that $(s,t)\mapsto \gamma_s(t)$ is smooth. Let $q:[0,1]\rightarrow M$ be the curve $q(s)=\gamma_s(0)$. Let $u\in P_{q(0)}$ and put $u_s=\mathcal{H}_\omega(q,s,u)(q,s,u)$ for $s\in[0,1]$. Then \[
+% \omega\left(\frac{\partial}{\partial s}(\mathcal{H}_\omega(\gamma_s,t',u_s)\right)=\int_0^{t'}\Omega\left(\widetilde{\frac{\partial}{\partial t}\gamma_s(t)},\widetilde{\frac{\partial}{\partial s}\gamma_s(t)}\right)dt
+%                                                                                                                                                     \]
+% \end{lemma}
+% \improve{WHAT was this for anyway?}
+
+\begin{definition}
+Let us consider the space \define{$P_1(M)$} of smooth paths $[0,1]\rightarrow M$ that are constant in a neighborhood of 0 and 1.
+ Two such paths $\gamma,\beta$ are said to be \define{rank-1 homotopic}, or \define{thinly homotopic}, if there is a smooth map $H:[0,1]\times [0,1]\rightarrow M$ such that:
+\begin{itemize}
+ \item $rank(DH_{(s,t)})\leq 1$, for all $(s,t)\in [0,1]\times [0,1]$,
+\item there exists $\epsilon\in ]0,1/2]$ such that\begin{align*}
+                                                     0\leq s \leq \epsilon &\Rightarrow H(s,t)=\alpha(t)\\
+						    1-\epsilon \leq s \leq 1 &\Rightarrow H(s,t)=\beta(t)\\
+						    0\leq t\leq \epsilon &\Rightarrow H(s,t)=\alpha (0)=\beta(0)\\
+						   1-\epsilon\leq t\leq 1 &\Rightarrow H(s,t)=\alpha(1)=\beta(1)
+                                                    \end{align*}
+
+\end{itemize}
+\end{definition}
+Note that it is this last property, that of having \define{sitting} instants at 0 and 1, that forces the composition of smooth paths to be smooth. Also any path can be reparametrized to be of this type. One can check (see \cite{picken_holonomy}) this is an equivalence relation in $P_1(M)$.
+\begin{definition}
+ To a smooth manifold we associate the \define{path groupoid} $P_1^1(M)$ with
+\begin{itemize}
+ \item points of $M$ as objects
+\item morphisms between points the thin homotopy classes of paths $\gamma:[0,1]\rightarrow M$ that are constant in a neighborhood of 0 and 1.
+\end{itemize}
+\end{definition}
+
+Clearly it is a groupoid with the inverse given by the path with reversed orientation. Most importantly, it is a smooth 2-space. Its set of morphisms $\gamma:[0,1]\rightarrow M$ is smooth in the natural way, in that a plot \[
+\xymatrix{C\ar[r] & Map([0,1],M)   \\
+c\ar@{|-_{>}}[r] & (t\mapsto \gamma (c)(t))}
+\]
+ is any map from a convex set $C\subset \mathbf{R}^n$ (for arbitrary $n$) such that \[
+                       \xymatrix{ C\times [0,1] \ar[r] & M\\
+(c,t)\ar@{|-_{>}}[r] & \gamma(c)(t)}
+                      \]
+is smooth.
+
+By Proposition \ref{smoothprop}, the subset of paths with sitting instants is also a smooth space and the quotient by the thin homotopy equivalence is also a smooth space. 
+
+Alternatively we could have restricted our study to the space \define{$\Omega_1$} of \emph{loops} in $P_1(M)$, only to obtain a \emph{group} \define{$\pi_1^1(M)$} of loops up to rank-one homotopy. 
+The holonomy remains constant along each thin homotopy class, moreover:
+\begin{prop}
+ The holonomy of a connection $\nabla$ defines a group morphism $\mathcal{H}_\nabla:\pi_1^1(M)\rightarrow G$.
+\end{prop}
+This brings us to the axiomatic definition of holonomy in \cite{barrett,picken_holonomy}. Recall that a \define{smooth family of loops} is a map $\phi:U\rightarrow \pi_1^1(M)$ where $U\subset \mathbb{R}^n$ is open, such that there exists $\widetilde{\phi}:U\rightarrow \Omega_1(M)$ projecting to $\phi$ and
+\begin{align*}
+ U\times [0,1] &\rightarrow M \\
+  (x,t)&\mapsto \widetilde{\phi}(x)(t)
+\end{align*}
+is smooth.
+\begin{definition}
+ An (axiomatic) \define{holonomy} is a group morphism $\mathcal{H}:\pi_1^1(M) \rightarrow G$ such that, for every smooth family of loops $\phi:U\rightarrow \pi_1^1(M)$, the following composition is smooth.
+\[
+ \xymatrix{U\ar[r]^{\widetilde{\phi}} & \Omega_1(M) \ar[r]^\pi & \pi_1^1(M)\ar[r]^{\mathcal{H}} & G}
+\]
+\end{definition}
+This is a proper definition of holonomy, as Barrett proved, every such holonomy comes from a holonomy of the connection. In fact, the main result in \cite{picken_holonomy} is the following.
+
+\begin{theorem}\label{bundle121}
+ There is a one-to-one correspondence between (axiomatic) holonomies and bundles with connections $(p:E\rightarrow M,\omega)$ with a fixed point $*\in M$.
+\end{theorem}
+
+\newpage

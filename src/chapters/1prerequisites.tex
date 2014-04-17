@@ -1,0 +1,347 @@
+%\subsection{2-Categories}
+
+A discussion of this definition can be found in \cite{maclane} (pgs. 273-275) and \cite{ncatsbaez}.
+
+\future{hipotese de haver produtos, a terminal object e limites em $\mathbf{CAT}$ etc.}
+\future{\improve{definicao confusa. A definicao mais recente e a partir de $\infty$-category, se houver tempo e nao complicar intuicao, entao reescrever. ou entao reescrever da forma mais longa uma introducao natural com diagramas (em baixo) como no maclane e depois resumir a definicao formal em baixo}}
+
+
+\begin{definition}
+A \define{2-category}, or a \define{strict 2-category}, consists of a category $C$, together with \begin{enumerate}
+ \item categories $T(a,b)$ for all objects $a,b\in C_0$, where the objects of the category $T(a,b)$ are the morphisms in $C$ from $a$ to $b$,
+\item a functor $F_{a,b,c}:T(a,b)\times T(b,c)\rightarrow T(a,c)$, for each triple of objects $a,b,c$ (the \define{horizontal composition}, denoted by $\circ$), that acts on objects as the usual composition of morphisms, is associative and satisfies the unity axioms (see below),
+\item for each object $a$, a functor $U_a:1\rightarrow T(a,a)$, where $1$ is the terminal category (assigning to the single object of $1$ the identity morphism in $T(a,a)$).
+\end{enumerate}
+\end{definition}
+
+
+Here we are adding to a category a collection of morphisms between morphisms that can be ``vertically'' composed. We refer to the arrows of $T(a,b)$ as the \define{$2$-morphisms} or \define{$2$-cells}, which inherit from $T(a,b)$ the \define{vertical composition} denoted by $\bullet$. For a 2-morphism $\alpha$ from $f:a\rightarrow b$ to $g:a\rightarrow b$, we write $\alpha: f\Rightarrow g$, or 
+
+\[
+ \xymatrix{a \ar@/^1pc/[rr]^{f}_{}="0"
+           \ar@/_1pc/[rr]_{g}="1"
+           \ar@{=>}"0";"1"^{\alpha}
+&& b
+}
+\]
+
+For each $f:a\rightarrow b$, \define{$id_f$}\footnote{Often we make the abuse of just writing $f$.} denotes the identity of $f$ as an arrow in $T(a,b)$ and we simply write
+
+\[
+ \xymatrix{a\ar[rr]^{id_f} && b}
+\]
+
+The \define{unity axioms} of the composition require that, for each $\sigma:f\Rightarrow g$, where $f,g:a\rightarrow b$, we have that
+
+\[ id_a \circ \sigma = \sigma = \sigma \circ id_b \]
+
+where $id_c\in (T(c,c))_1$ also denotes the identity arrow of $id_c\in (T(c,c))_0$.
+
+%% $f:a\rightarrow b$, \[ id_a \circ f = f = f \circ id_b\]
+
+Note that, under the notation above and by the functoriality of the horizontal composition, we get what we call the \define{interchange law}:\begin{equation}
+(f\bullet f')\circ (g\bullet g')=(f\circ g)\bullet (f'\circ g'),\label{interchangelaw}
+\end{equation}
+for all $f,f'\in (T(a,b))_{1},\quad g,g'\in (T(b,c))_{1}$.
+
+
+%% \[
+%% \xymatrix{
+%%    a \ar@/^1pc/[rr]^{f}_{}="0"
+%%            \ar@/_1pc/[rr]_{g}="1"
+%%            \ar@{=>}"0";"1"^{\alpha}
+%% && b \ar[rr]^{id_b}
+%% % \ar@/^1pc/[rr]^{id_b}_{}="0"
+%% %            \ar@/_1pc/[rr]_{id_b}="1"
+%% %            \ar@{=>}"0";"1"^{id_{(id_b)}}
+%% && b
+%% }
+%% \qquad
+%%  \xymatrix{
+%%    a \ar@/^1pc/[rr]^{f}_{}="0"
+%%            \ar@/_1pc/[rr]_{g}="1"
+%%            \ar@{=>}"0";"1"^{\alpha}
+%% && b}
+%% \]
+%% 
+%% \[
+%% \xymatrix{
+%%    a \ar@/^1pc/[rr]_{}="0"
+%%            \ar@/_1pc/[rr]_{}="1"
+%%            \ar@{=>}"0";"1"^{g}
+%% && b \ar@/^1pc/[rr]_{}="2"
+%%            \ar@/_1pc/[rr]_{}="3"
+%%            \ar@{=>}"2";"3"^{g'}
+%% && b
+%% }
+%% \]
+%% 
+%% 
+%% BAD The horizontal and vertical compositions are represented by the following diagrams:
+%% 
+%% \[
+%% \xymatrix{
+%%    a \ar@/^1pc/[rr]_{}="0"
+%%            \ar@/_1pc/[rr]_{}="1"
+%%            \ar@{=>}"0";"1"^{g}
+%% && b \ar@/^1pc/[rr]_{}="2"
+%%            \ar@/_1pc/[rr]_{}="3"
+%%            \ar@{=>}"2";"3"^{g'}
+%% && c
+%% }
+%% \]
+%% 
+%% \[
+%% \xymatrix{
+%%    a \ar@/^2pc/[rr]^{f}_{}="0"
+%%            \ar[rr]_{g}="1"
+%%            \ar@{=>}"0";"1"^{\alpha}
+%%            \ar@/_2pc/[rr]_{h}="2"
+%%            \ar@{=>}"1";"2"^{\beta}
+%% && b
+%% }
+%% \]
+
+\begin{definition}
+A \define{2-functor} $F$ between two 2-categories $C$, $C'$, or $F:C\rightarrow C'$, is a functor between $C$ and $C'$ as categories, together with a function that assigns to each 2-morphism $\alpha:f\Rightarrow g$ in $C$ a 2-morphism $F_\alpha:F(f)\Rightarrow F(g)$ in $C'$, such that the compositions and the identities are preserved, i.e., for all $\alpha:(f:a\rightarrow b) \Rightarrow (g:a\rightarrow b), \beta:(g:a\rightarrow b)\Rightarrow (h:a\rightarrow b)$ and $\gamma:(f':b\rightarrow c) \Rightarrow (g':b\rightarrow c$):
+\begin{align}
+F_{\alpha \bullet \beta}&=F_{\alpha}\bullet F_{\beta}\\
+F_{\alpha \circ \gamma}&=F_{\alpha}\circ F_{\gamma}\\
+F_{id_f} &= id_{F(f)}
+\end{align}
+Similarly one defines 2-natural transformations between 2-functors.
+\end{definition}
+
+\begin{example}
+$\mathbf{CAT}$, together with functors and natural transformations, are the objects, morphisms and 2-morphisms of the prototypical 2-category. Analogously 2-categories also form a 2-category.
+\end{example}
+
+\subsection{Internalization}
+
+\begin{definition}
+ Let $K$ be a (finitely complete) category. An \define{internal category} in $K$ (also called a \define{category object} in $K$, or just \define{category in $K$}) is a tuple $C$ consisting of:
+\begin{itemize}
+ \item an object $Ob(C)\in K_0$,
+\item an object $Mor(C)\in K_0$,
+\item morphisms $s,t:Mor(C)\rightarrow Ob(C)$  in $K_1$ (called the \define{source} and \define{target} morphisms),
+\item a composition morphism $Mor(C) {{}_s\times_t} Mor(C)\rightarrow Mor(C)$ in $K_1$,
+\item an identity morphism $Ob(C)\rightarrow Mor(C)$,
+\end{itemize}
+satisfying the usual rules of categories. Alternatively, instead of restricting to finitely complete categories, we could only have required that in $K$ the above pullbacks and products exist in $K$. One can similarly define functors and natural transformations in $K$ (see \cite{ehresmann}). These are the objects, morphisms and 2-morphisms of a 2-category respectively, denoted $KCat$.
+\end{definition}
+
+This internalization process has a straightforward generalization for 2-categories, which we will use later. 
+
+\begin{example}\label{diffp}
+ \begin{enumerate}
+  \item A small category is an internal category in $\mathbf{Set}$.
+\item A \define{Lie group} is a group (considered as a category with one object and invertible morphisms) in $\mathbf{Diff}$.  Note that $\mathbf{Diff}$ has all products but not all pullbacks. But since every group as a category has only one object, it is easy to see that our pullbacks are just products. The Lie groups with Lie homomorphisms form a category we denote \define{$\mathbf{LieGrp}$}, a finitely complete category.
+\end{enumerate}
+%% \improve{Esta nao e a definicao de grupo de Lie para ``espacos suaves'' pois nao inclui so as variedadesm na verdade seria um ``smooth group'' (\cite[p. 10]{baezhigher}}
+\end{example}
+
+\begin{definition}
+ A (strict) \define{2-group}\label{sec:2group} (respectively \define{$\text{Lie 2-group}$}) is a category object in $\mathbf{Grp}$ (resp. in $\mathbf{LieGrp}$).
+\end{definition}
+
+
+A 2-group can be regarded as a 2-category $K$ in the following way: start with the singular $K_0=\{\cdotp\}$, morphisms being the objects of the 2-group (and composition their product), together with 2-morphisms given by the morphisms of the 2-group. In fact, a 2-group can be defined alternatively as a 2-category with one object and invertible morphisms and 2-morphisms.
+
+\future{Lie group: caso particular de smooth group (substituir $\mathbf{Diff}$ por pela categoria dos \emph{smooth spaces}).}
+
+\future{subsection:2-Fundamental grupoid}
+
+\subsection{Groupoids}
+
+Briefly, a \define{groupoid} is a small category in which every morphism is invertible. Any group produces a groupoid with one object (with the arrows of the groupoid being the elements of the group, and their composition their product). More specifically:
+
+\begin{definition}
+ A groupoid consists of two sets $G$ and $M$, two maps $s,t: G\rightarrow M$ (the source and target projection) and a map $1:M\rightarrow G$, with a partial multiplication on $G$ on the set $G*G=\{(g,h):s(g)=t(h) \}$ such that (denoting $1_x=1(x)$, and writing the composition from right to left\future{write composition in reverse!}):
+\begin{enumerate}
+ \item $s(hg)=s(g)$ and $t(hg)=t(h)$ for all $(h,g)\in G*G)$;
+\item $f(gh)=(fg)h$ whenever this product is defined;
+\item $s(1_x)=t(1_x)=x$, for all $x\in M$;
+\item $g1_{s(g)}=g=1_{t(g)}g$ for all $g\in G$;
+\item Every $g\in G$ has a two-sided inverse $g^{-1}$, an element such that $s(g^{-1})=t(g)$, $t(g^{-1})=s(g)$, $gg^{-1}=1_{t(g)}$ and $g^{-1}g=1_{s(g)}$.
+\end{enumerate}
+\end{definition}
+
+In full, a Lie groupoid is a groupoid $L$ with smooth structures on $Ob(L),Mor(L)$, such that the source and target maps $s,t:Mor(L)\rightarrow Ob(L)$ of the groupoid are surjective submersions and all the category operations (source, target, composition, identity) are smooth.
+
+\begin{definition}
+\begin{itemize}
+ \item A \define{Lie groupoid} is a groupoid internalized in $\mathbf{Diff}$ with source and target maps being surjective submersions.
+\item A \define{2-groupoid} is a 2-category with invertible morphisms and 2-morphisms.
+\end{itemize}
+
+
+\end{definition}
+
+\future{\improve{problema de $\mathbf{Diff}$ nao ter pullbacks}}
+
+
+\subsection{Crossed modules}
+
+\begin{definition}
+ A \define{crossed module} is a quadruple $\mathcal{G}=(H,G,\partial:H\rightarrow G,\vartriangleright)$ where $H,G$ are groups, $\vartriangleright:G\rightarrow \text{Aut}(H)$ is a left action of $G$ on $H$ and $\partial:H\rightarrow G$ is an equivariant group morphism, i.e.
+\[
+ \partial (g\vartriangleright h)=g\partial(h)g^{-1}\qquad \text{for all }g\in G,h\in H
+\]
+and we also require the \define{Peiffer identity}:
+
+\[\partial(e)\vartriangleright h=ehe^{-1} \qquad \text{for all }e,h\in H.\]
+When $H$ and $G$ are Lie groups and $\partial,\vartriangleright$ are smooth, $\mathcal{G}$ is said to be a \define{Lie crossed module}.
+\end{definition}
+
+\begin{example}\label{trivcross}
+ Let $G$ be a Lie group and $Ad$ the adjoint action of $G$ in $G$. Then $(id:G\rightarrow G,Ad)$ is a Lie crossed module.
+\end{example}
+\label{passage}
+This allows us to easily construct 2-groups, since any 2-group is derived from a crossed module $(H,G,\partial,\vartriangleright)$ (the same can be said for \emph{Lie} 2-groups and \emph{Lie} crossed modules): take the set of objects of $K$ to be $G$, and the morphisms \[ (h,g)\qquad h\in H, g\in G                                                                                                                                                                          \]
+with the \emph{source}, \emph{target} and \emph{identity} maps \begin{align}
+id(g)&=(1,g)\\
+                                               d_0((h,g))&=g\\
+						d_1((h,g))&=\partial(h)g \label{eq:fakec}
+                                              \end{align}
+together with the composition of morphisms \begin{align*}
+                                            (h,g)\bullet(h',g')&=(h'h,g).
+                                           \end{align*}
+everytime $g'=\partial(h)g$. In a 2-category form, this would be the vertical composition of 2-morphisms, and the horizontal composition would be \begin{align*}
+(h,g)\circ(h',g')&=(h (g\vartriangleright h),gg').
+                                                       \end{align*}
+
+It should be remarked that it is property \ref{eq:fakec} that leads to the constraint of vanishing fake curvature, as discussed afterwards (see \cite[p. 16]{baez-2004}).
+
+Conversely a (Lie) crossed module is obtained from a (respect. Lie) 2-group $\mathcal{G}$ putting
+\[  G=\mathcal{G}_0\]
+\[H=\{ f\in \mathcal{G}_1: \text{source}(f)=1\in G\} \]
+\[ \partial(f)=\text{target}(f)\]
+\[g \vartriangleright h=1_g h 1_g^{-1}\]
+
+In fact (\cite[p. 10]{baezhigher}), 
+\begin{theorem}
+ The 2-category of Lie 2-groups is biequivalent to that of Lie crossed modules.
+\end{theorem}
+
+% \improve{In \cite[p. 10]{baezhigher}, the 2-category of Lie 2-groups is biequivalent to that of Lie crossed modules.
+% No \cite[p. 287]{maclane} ``the category of crossed modules is categorically equivalent to the category of diagrams staisfying \ldots''.
+% \cite[p. 11]{picken_faria} ``the category of crossed modules is equivalent to the category of categorical groups''}
+
+The following examples will be crucial in the study of 2-bundles and gerbes.
+\begin{example} \label{abgerb}
+ Let $H$ be an abelian Lie group, and take $G$ to be trivial group, together with the trivial maps $\vartriangleright,\partial$. This corresponds to the Lie 2-group with one object and $H$ as the group of morphisms.
+\end{example}
+\begin{example} \label{nabgerb}
+ Let $H$ be a Lie group. Take $G=\text{Aut}(H)$, with the map sending $h\in H$ to the automorphism $Ad_h$, where $f\in Aut(H)$ acts naturally on $H$ by 
+\[ f \vartriangleright h = f(h) \]
+Then $(H,\text{Aut}(H), Ad:H\rightarrow \text{Aut}(H),\vartriangleright)$ is a crossed module. The corresponding Lie 2-group is called the \define{automorphism 2-group} of $H$ and is denoted $\mathcal{AUT}(H)$. In fact to any category $F$, we associate a 2-group \define{$\mathcal{AUT}(F)$} consisting of one object, morphisms as autoequivalences of $F$ and invertible natural transformations between these.
+\end{example}
+
+
+Taking the induced Lie algebra map $\partial:\mathfrak{e}\rightarrow\mathfrak{g}$ of a Lie crossed module, we get a structure like the following.
+
+\begin{definition}
+ A \define{differential crossed module} is a quadruple $\mathfrak{g}=(\mathfrak{e},\mathfrak{g},\partial,\vartriangleright)$ where $\mathfrak{e},\mathfrak{g}$ are Lie-algebras, $\partial:\mathfrak{e}\rightarrow\mathfrak{g}$ is a Lie algebra morphism and $\vartriangleright$ is a left action of $\mathfrak{g}$ on $\mathfrak{e}$, such that:
+\begin{itemize}
+ \item For all $X\in\mathfrak{g}$, $e\mapsto X\vartriangleright e$ is a derivation of $\mathfrak{e}$. That is for $e,f\in \mathfrak{e}$:\[X\vartriangleright [e,f] = [X\vartriangleright e,f]+[e,X\vartriangleright f]\]
+ \item Let $\text{Der}(\mathfrak{e})$ be the Lie algebra algebra of derivations of $\mathfrak{e}$.  Then the map $\mathfrak{g}\rightarrow \text{Der}(\mathfrak{e})$ induced by the action of $\mathfrak{g}$ on $\mathfrak{e}$ is a \emph{Lie algebra morphism}.
+\item For all $X\in\mathfrak{g}$ and $e\in\mathfrak{e}$, $\partial(X\vartriangleright e)=[X,\partial(e)]$
+\item For all $f\in \mathfrak{e}$, $\partial (e)\vartriangleright f=[e,f]$.
+\end{itemize}
+\end{definition}
+
+ Given a differential crossed module $\mathfrak{G}=(\partial:\mathfrak{e}\rightarrow\mathfrak{g},\vartriangleright)$, it is standard Lie Theory to prove there is a unique crossed module $\mathcal{G}=(\partial:E\rightarrow G,\vartriangleright)$ of simply connected groups (up to isomorphism) whose differential crossed module is $\mathfrak{G}$. See \cite[p. 10]{picken_faria}.
+
+\subsection{Smooth spaces}
+
+As we previously noted in Example \ref{diffp}, $\mathbf{Diff}$ does not have pullbacks. This category can be expanded to one which does and still retains many of its properties. See \cite{baezsmooth} for details.
+\begin{definition}
+A \define{smooth space} is a set $S$ together with, for every convex set $C\subset \mathbb{R}^n$ for arbitrary $n$, a collection of functions $\phi:C\rightarrow S$ (hereby called \define{Plots} in $S$) such that:
+\begin{itemize}
+ \item If $\phi:C\rightarrow S$ is a plot and $f:C'\rightarrow C$ is smooth, then $\phi\circ f$ is a plot.
+\item If $\phi:C\rightarrow S$ is such that, for an open cover $c_\alpha:C_\alpha\rightarrow C$ of the convex set $C$ by convex subsets $\phi\circ c_\alpha$ is a plot, then $\phi$ is a plot.
+\item Any map from a point to $S$ is a plot.
+\end{itemize}
+
+A \define{smooth map} from a smooth space $S$ to a smooth space $S'$ is a map $f:S\rightarrow S'$ such that for every plot $\phi$ in $S$, $\phi\circ f$ is a plot in $S'$.
+This defines a category we call \define{$\mathbf{C^\infty}$}.
+\end{definition}
+\begin{prop}\label{smoothprop}
+\begin{itemize}
+ \item $C^\infty$ is cartesian closed, that is, the cartesian product $X\times Y$ and $Hom(X,Y)$ have natural smooth structures and satisfy the usual adjunction\future{See notes of Professor},
+\item Objects and maps in $\mathbf{Diff}$ are naturally contained in $\mathbf{C^{\infty}}$,
+\item Subsets of smooth spaces have a natural structure of smooth spaces,\label{restrict}
+\item The quotient of a smooth space by an equivalence relation is a smooth space,
+\end{itemize} 
+\end{prop}
+
+% Note we can define vector fields and differential forms as before with most of the usual properties.
+
+
+By satisfying the usual adjunction, we mean that for each $X,Y\in (C^\infty)_0$ there is an object $Hom(X,Y)\in (C^\infty)_0$ such that \[
+                                                                               Hom(X\times Z,Y)=Hom(X,Hom(Z,Y))
+                                                                              \]
+A plot in $Hom(X,Y)$ is a map $\varphi:C\rightarrow Hom(X,Y)$ such that for all plots $\phi:C'\rightarrow X$ of $X$, the following is a plot of $Y$\[
+                                                                                                                                                   \xymatrix{C\times C' \ar[r]^{id\times \phi} & C\times X \ar[r]^\varphi & Y}
+                                                                                                                                                   \]
+Naturally a subset will have a smooth structure given by the plots in the set whose image is contained in the subset. Likewise, the plots of an equivalence relation of a smooth space $S$ are those that lift to a plot in $S$.
+
+\begin{definition}
+ We call the objects, morphisms and 2-morphisms of $C^\infty\text{Cat}$ the \define{smooth 2-spaces}, \define{smooth maps} and \define{smooth 2-maps}, respectively. A group object in $C^\infty\text{Cat}$\footnote{Recall that a group object in a category $C$ is an object $G$ of $C$ together with morphisms $m:G\times G\rightarrow G$, $id:1\rightarrow G$ and $inv:G\rightarrow G$ in $C$ such that: $m$ is associative, $id$ is a two sided unit of $m$ and $inv$ is a two sided inverse for $m$.} is called a \define{smooth 2-group} and similarly a \define{smooth 2-groupoid} is a $C^\infty-2Cat$ with all morphisms and $2$-morphisms invertible.
+\end{definition}
+Here the morphisms that define $G$ as a group object in $C^\infty\text{Cat}$ give a natural group structure to $G_0,G_1$ so that $G$ is a 2-group as before.
+Notice that, since $C^\infty$ generalizes $\mathbf{Diff}$, all Lie groups and 2-groups are also smooth groups \index{smooth group} (meaning a group object in $C^\infty$) and 2-groups respectively. Also it is clear that, whenever $F$ is a 2-space, then $\mathcal{AUT}(F)$ is smooth.
+
+\subsection{Presheaves}
+
+\begin{definition}
+A \define{presheaf} $\mathcal{F}$ \emph{on a topological space} $X$ is a contravariant functor from $Open(X)$ (the category of open sets with inclusions) to \define{\textbf{Ab}}, the category of abelian groups. A \define{homomorphism of presheaves} $h:\mathcal{F}\rightarrow \mathcal{G}$ is a natural transformation from the functor $\mathcal{F}$ to the functor $\mathcal{G}$.
+\end{definition}
+
+\begin{example}
+\begin{itemize}
+\item $\mathcal{F}=\Omega^*(\cdot)$ which assigns to every open $U$ on a manifold the differential forms on $U$, and to each inclusion $i_U^V:V\hookrightarrow U$ the restriction
+\begin{align*}
+\Omega^*(U)&\rightarrow \Omega^*(V)\\
+f&\mapsto f_{|V}
+\end{align*}
+\item $\mathcal{F}=C^\infty(\cdot,S^1)$ that to every open $U$ in $X$ associates $C^\infty(U,S^1)$, and to each inclusion $i_U^V:V\hookrightarrow U$ the restriction 
+\begin{align*}
+C^\infty(U,S^1)&\rightarrow C^\infty(V,S^1)\\
+f&\mapsto f_{|V}
+\end{align*}
+\end{itemize}
+\end{example}
+
+\subsubsection{\v{C}ech cohomology}
+                                                                                                                                
+\begin{definition}
+Let $\mathcal{F}$ be a presheaf on a topological space $X$ and $\textswab{U}=\{U_j\}_{j\in J}$ a cover of $X$. The products 
+$\mathcal{C}^i(\textswab{U},\mathcal{F})=\prod_{\alpha_1\ldots \alpha_{i+1}\in J}\mathcal{F}(U_{\alpha_1\ldots \alpha_{i+1}})$, for $i\geq 0$ are the \define{i-cochains} on $\textswab{U}$ with values in the presheaf $\mathcal{F}$.
+\end{definition}
+
+An $i$-cochain is a function that assigns to a tuple of $i+1$ open sets of the cover $U_{\alpha_1},\ldots,U_{\alpha_{i+1}}$ an element of $\mathcal{F}(U_{\alpha_1\ldots \alpha_{i+1}})$.
+
+%% Note that $U_{\alpha_1\alpha_2}\hookrightarrow^{i_j} U_{\alpha_j}$ for $j=1,2$ so we get the restrictions $\mathcal{F}(U_{\alpha_1\alpha_2})\rightarrow^{\mathcal{F}(i_j)}\mathcal{F}(U_{\alpha_j})$, $j=1,2$. 
+
+Note that each $\xymatrix@1{ U_{\alpha_0\ldots\alpha_k}\ar@{^{(}->}[r]^-{i_j} & U_{\alpha_0\ldots\widehat{\alpha_j}\ldots\alpha_k}}$, for $j=0,\ldots,k$ induces a restriction $\xymatrix@1{\mathcal{F}(U_{\alpha_0\ldots\widehat{\alpha_j}\ldots\alpha_k})\ar[r]^-{\mathcal{F}(i_j)}  & \mathcal{F}(U_{\alpha_0\ldots\alpha_k})}$.
+
+Defining \begin{align*}
+\delta&:C^k(\textswab{U},\mathcal{F})\rightarrow C^{k+1}(\textswab{U},\mathcal{F}) \\
+\delta&=\mathcal{F}(i_0)-\mathcal{F}(i_1)+\ldots+(-1)^{k+1}\mathcal{F}(i_{k+1})
+\end{align*}
+that is, for each $\omega\in C^k(\textswab{U},\mathcal{F})$,
+\begin{equation*}
+(\delta \omega)_{\alpha_0,\ldots,\alpha_{k+1}}=\sum_{i=0}^{k+1}(-1)^i \mathcal{F}(i_k)(\omega_{\alpha_0,\ldots,\alpha_{k+1}})
+\end{equation*}
+\future{\improve{No livro ele nao escreve assim, parece ter um erro.}}
+We have the following result:
+\begin{prop}
+$\delta^2=0$.
+\end{prop}
+\begin{definition}
+The complex formed this way has a cohomology $H^*(\textswab{U},\mathcal{F})$ we call the \define{\v{C}ech cohomology of the cover $\textswab{U}$ with values in $\mathcal{F}$}. 
+\end{definition}
+For a proof see for instance \cite[p. 110]{bott}.
+
+\future{\improve{It lacks the cover independent definition}}

@@ -1,0 +1,530 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%               Template para resumo alargado de tese            %
+%                  Autor: J. Seixas   Setembro 2009              %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[11pt,a4]{article} %duas colunas
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage[top=3cm,bottom=2cm,left=2.0cm,right=2.0cm]{geometry}	
+%\usepackage[portuguese]{babel}
+\usepackage[portuguese,english]{babel}
+\usepackage{pstricks}
+\usepackage{verbatim}
+\usepackage{graphicx}
+%\usepackage{multicol}
+\usepackage[all]{xy}
+\renewcommand{\baselinestretch}{1.5}
+\setlength\columnsep{20pt}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{corollary}[theorem]{Corollary}%[chapter]
+\newtheorem{prop}[theorem]{Proposition}
+
+\def\of #1{\!\left({#1}\right)}
+\def\hol {{\rm hol}}
+
+\newcommand{\fpartial}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\towrite}{\begin{center}{\Large $\clubsuit$ Section not yet written
+$\clubsuit$ } \end{center}}
+\newcommand{\tofinish}{\begin{center} {\Large $\spadesuit$ Section not yet
+finished $\spadesuit$}\end{center}}
+\newcommand{\notsure}[1]{\emph{#1}\footnote{$\clubsuit$CONFIRM$\clubsuit$}}
+\newcommand{\improve}[1]{\begin{center}
+                         \begin{tabular}{|p{8cm}|}
+\hline
+\textbf{TO DO}: \textsc{#1}\\
+\hline
+\end{tabular}
+                         \end{center}}
+%\newcommand{\future}[1]{{\color{red} #1}}
+\newcommand{\future}[1]{}
+\newcommand{\question}[1]{\begin{center}
+                         \begin{tabular}{|p{8cm}|}
+\hline
+\textbf{\textsc{Q}}: {\color{red} \textsc{#1}}\\
+\hline
+\end{tabular}
+                         \end{center}}
+\newcommand{\squestion}[1]{\footnote{$\clubsuit\spadesuit$#1$\clubsuit\spadesuit$}}
+\newcommand{\define}[1]{\index{#1}\emph{#1}}
+\newcommand{\mention}[1]{\index{#1} \emph{#1}}
+
+
+\begin{document}
+%
+% Title and author
+%
+\title{On the existence of categorical connections}
+\author{Nelson Batalha\\
+\textit{Under supervision of Prof. Gustavo Granja}\\ % supervisor
+\textit{Dep. Matemática, IST, Lisbon, Portugal}}
+\date{2010}
+\maketitle
+%% \begin{abstract}
+%% We review the construction of 2-bundles with 2-connections by Baez as a categorification of locally trivial principal bundles with connections and focus our study on the particular case of categorical connections. Namely we study conditions for their existence.
+%% \end{abstract}
+
+\bigskip
+\textbf{\Large Keywords:} 2-bundle, 2-categories, categorical connection, categorification, internalization, higher gauge theory, holonomy.
+\bigskip
+%\begin{multicols}{2}
+%
+\section{Introduction}
+
+This is an extended abstract for \cite{nelson}. Recently there has been much interest in categorifying bundles and connections with a view to applications in Physics. In \cite{baez-2004} a notion of 2-bundle and 2-connection was introduced. Faria Martins and Picken defined and studied a concrete special case which they called categorical connection on a principal bundle, where the structure group is put in the form of a crossed module.
+
+We now describe this notion and present our result considering existence of categorical connections on a given principal bundle, which we achieve by essentially describing categorical connections as sections in an associated vector bundle.
+
+%, where we briefly review the construction of 2-bundles and connections to study the particular case of categorical connections. 
+
+
+
+%% we study its existence in a given bundle and crossed module, by essentially describing categorical connections as sections in an associated vector bundle.
+
+%% \section{Prerequisites}
+%% \subsection{Bundles}
+%% 
+%% \begin{definition}
+%%  A \define{bundle} is a triple $\xi=(E,p,B)$ where $p:E\rightarrow B$ is a (continuous) map. We call $B(\xi)=B$ the \define{base space}, $E(\xi)=E$ the \define{total space} and $p$ the \define{projection of the bundle}. One has naturally \define{products of bundles} $(E\times E',p\times p',B\times B')$ and \define{subbundles} $(E',p,B')\subset (E,p,B)$ every time $E'\subset E$ and $B'\subset B$. We call a map $s:B\rightarrow E$ a \define{cross-section} if $p\circ s=\text{id}_B$.
+%% \end{definition}
+%% 
+%% \begin{example}
+%% For instance, we have the \define{trivial bundle} $(B\times F,\pi,B)$ where $\pi:B\times F\rightarrow B$ is the projection.
+%% \end{example}
+%% 
+%% \begin{definition}
+%%  A pair of maps $u:E\rightarrow E'$ and $f:B\rightarrow B'$ is said to be a \define{bundle morphism} of the bundles $\xi=(E,p,B)$ and $\eta=(E',p',B')$ when the following diagram commutes:
+%% \[
+%%  \xymatrix{E\ar[r]^u \ar[d]^p & E'\ar[d]^{p'}\\
+%% B\ar[r]^f & B'}
+%% \]
+%% When $B'=B$, a \define{bundle morphism over $B$} is a map $u:E\rightarrow E'$ such that the following commutes:
+%% \[
+%%  \xymatrix{E\ar[rr]^u \ar[dr]^p &  & E' \ar[dl]^{p'} \\ & B & }
+%% \]
+%% The set of bundles together with the set of bundle morphisms form a category, denoted $\mathbf{Bun}$. This category restricts to the category $\mathbf{Bun_B}$ of bundles over $B$ together with bundle morphisms over $B$, for any space $B$.
+%% 
+%% Note that from the categorical setting, one obtains the notion of \define{bundle isomorphism}.
+%% 
+%% When $\xi=(E,p,B)$ is such that each \define{fibre} $p^{-1}(x)$ is homeomorphic to a space $F$, $\xi$ is said to be a \define{bundle with fibre $F$}. In particular, when $\xi \approx B\times F$ we call it the \define{trivial bundle over $B$}.
+%% 
+%%  For $A\subset B$, the bundle $\eta=(p^{-1}(A),p,A)$ is said to be the \emph{restriction} of $\xi =(E,p,B)$ to $A$\index{restriction of a bundle} \label{restrict} and is denoted \define{$\xi_{|A}$}. This is a particular case of the following: given $\xi=(E,p,B)$ and a map $f:B'\rightarrow B$, one gets a bundle over $B'$, the \define{induced bundle of $\xi$ over $f$} (or \define{pullback}) and denoted \define{$f^*(\xi)$} with:\begin{itemize}
+%%      \item $E(f^*(\xi))=\{(b',x)\in B'\times E:f(b')=p(x)$ \}
+%%     \item $p'(b',x)=b'$                                                                                                                                                                                                                                                                                                                                                                                                     \end{itemize}
+%% The fibre product of the bundles $\xi_1=(E_1,p_1,B)$ and $\xi_2=(E_2,p_2,B)$ over $B$ is $(E_1\oplus E_2,p,B)$ where \[
+%%                                                                                                                       E_1\oplus E_2=\{ (x,x')\in E_1\times E_2: p_1(x)=p_2(x') \}
+%%                                                                                                                      \]
+%% and $p(x,x')=p_1(x)=p_2(x')$.
+%% 
+%% 
+%% The bundles $\xi$ and $\eta$ over $B$ are said to be \define{locally isomorphic} if
+%% \[
+%%  \forall_{x\in B} \exists_{U\ni x \text{ open}} : \xi_{|U}\approx \eta_{|U}
+%% \]
+%% If $\xi$ is locally isomorphic to $(B\times F,p,B)$ for a certain space $F$, it is said to be a \define{locally trivial bundle with fibre $F$} (recall that local isomorphism is an equivalence relation).
+%% \end{definition}
+%% 
+%% % \begin{definition}
+%% %  A \define{topological group} is a group $G$ with a topology such that the following maps are continuous:
+%% % \begin{align*}
+%% %  G\times G &\rightarrow G   &G&\rightarrow G \\
+%% % (g,h)&\mapsto gh  &g&\mapsto g^{-1} 
+%% % \end{align*}
+%% % For such $G$, a (right) $G$-space $X$ is a space together with a map $X\times G\rightarrow X$ such that
+%% % \begin{align*}
+%% %  x(st)&=(xs)t \qquad \forall x\in X \text{ and } s,t\in G\\
+%% % x1&=x \qquad \forall x\in X
+%% % \end{align*}
+%% % A map $f:X\rightarrow Y$ between $G$-spaces is a \define{$G$-morphism} if
+%% % \[
+%% %  f(xg)=f(x)g \quad \forall x\in X,g\in G
+%% % \]
+%% % \end{definition}
+%% % \improve{continue!}
+%% % \begin{definition}
+%% %  A principal $G$-bundle is a $G$-bundle $(X,p,B)$ where $G$ acts effectively on $X$\footnote{that is, $xs=x$ implies $s=1$, or equivalently $xs=xt$ implies $s=t$} and \ldots
+%% % \end{definition}
+%% % \improve{nao ha uma definicao mais simpatica aqui?}
+%% 
+%% \begin{definition} Let $B$ be a manifold, and let $G$ Lie group. A \define{(differentiable, locally trivial) principal fibre bundle over $B$ with group $G$}\footnote{we often omit differentiability and local triviality} is a locally trivial bundle $(E,p,B)$ with fibre $G$ where:
+%% \begin{itemize}
+%%  \item $G$ acts freely on $E$,
+%% \item $B$ is the quotient space of $P$ by the equivalence relation induced by $G$,
+%% \item the canonical projection $\pi:E\rightarrow B$ is differentiable.
+%% \end{itemize}
+%% \end{definition}
+%% By local triviality, one has a covering $\{U_{\alpha} \}_\alpha$ of $B$ where the isomorphisms $p^{-1}(U_\alpha)\approx U_\alpha\times G$ induce natural mappings \begin{equation}
+%%                                                g_{\alpha\beta}:U_{\alpha\beta}\rightarrow G
+%%                                               \end{equation}
+%% the \define{transition functions} associated to the cover $\{U_{\alpha} \}_\alpha$. These obey the cocycle condition
+%% \begin{equation}\label{cycle}
+%%   g_{\alpha\gamma}(x)=g_{\alpha\beta}(x)g_{\beta\gamma}(x),\qquad x\in U_{\alpha\beta\gamma}
+%% \end{equation}
+%% 
+%% 
+%% Conversely, given a cover $\{U_{\alpha} \}_\alpha$ of $B$ and functions $g_{\alpha\beta}:U_{\alpha\beta}\rightarrow G$ obeying (\ref{cycle}), we can construct a principal bundle over $M$ with group $G$ with such transition functions. 
+%% 
+%% 
+%% \subsubsection{The associated and reduced bundles}
+%% 
+%% \begin{definition}
+%%  \index{Morphism of principal bundles} A morphism from a principal $G'$ bundle $(E',p',B')$ to a principal $G$ bundle $(E,p,B)$ is a pair $f=(f',f'')$ where $f':E'\rightarrow E$ is a bundle morphism and $f'':G'\rightarrow G$ is a homomorphism such that $ f'(u'g')= f'(u')f''(g')$ for all $u\in E',g\in G'$. It is said to be an \define{imbedding} if $f:E'\rightarrow E$ is an embedding and $f:G'\rightarrow G$ is a monomorphism. In this case $(E',p',B')$ is said to be a \define{subbundle} of $(E,p,B)$. If also $B=B'$ and the induced mapping $f:B'\rightarrow B$ is the identity, $f$ is said to be a \define{reduction of the structure group} $G$ to $G'$, and the bundle $(E',p',B')$ is the \define{reduced bundle}.
+%% \end{definition}
+%% 
+%% \begin{prop}\label{redprop}
+%% A principal bundle has a reduction of the structure group from $G$ to $H$ if and only if it has (local trivializations with) transition functions with values in $H$.
+%% \end{prop}
+%% 
+%% \begin{definition}
+%%  Let $\xi=(E,p,B)$ be a a principal $G$-bundle, and $F$ a space with a left $G$ action. The \define{associated bundle} of $\xi$ with fibre $F$, denoted $\xi[F]$, is defined as follows:
+%% $G$ acts on $E\times F$ with each $g\in G$ mapping $(x,f)\mapsto (xg,g^{-1}f)$. The \emph{total space} is then $E\times_G F$, the quotient of $E\times F$ by the action of $G$. It has a projection $p_F$ to $B$ induced by $E\times F\ni(x,f)\mapsto p(x)$. If $U\subset B$ trivializes $\xi$, i.e. $p^{-1}(U) \approx U\times G$, then $g\in G$ acts on $U\times G\times F$ by \[
+%% (x,h,f)\mapsto (x,hg,g^{-1}f)                                                                                      \]
+%% This induces a bijection $p^ {-1}_F(U)\approx U\times F$, and we introduce a differentiable structure on $E\times_G F$ by requiring $p_F^{-1}(U)$ to be open and diffeomorphic to $U\times F$.
+%% A \define{vector bundle} is then an associated bundle with fibre $F^n$, where $F=\mathbb{R}$ or $\mathbb{C}$, and structure group $GL(n,F)$.
+%% \end{definition}
+%% 
+%% Similarly one defines \define{morphisms of vector bundles} as bundle morphisms that are linear on the fibres, and say they are monomorphisms (respectively epimorphisms) if they are monomorphisms (resp. epimorphisms) on each fibre.
+%% 
+%% The following we will later need for our main result.
+%% \begin{theorem}\label{exactseq}
+%%  Let $\xymatrix{0\ar[r]&\xi\ar[r]^u & \eta \ar[r]^v &\chi \ar[r] & 0}$ be a short exact sequence of vector bundles over $B$. Then there is a morphism $w:\xi\oplus\chi \rightarrow \eta$ such that the following diagram commutes:
+%% \[
+%%  \xymatrix{ & &\eta\ar[dr]^v & & \\
+%% 0\ar[r]&\xi\ar[ur]^u \ar@{^{(}->}[dr] & &\chi\ar[r] & 0\\
+%% &&\xi\oplus\chi\ar[uu]^w \ar[ur]&&}
+%% \]
+%% \end{theorem}
+%%  
+%% 
+%% \subsection{Connections on principal bundles}
+%% \subsubsection{Left invariance}
+%% 
+%% Let $G$ be a Lie group, and denote $e$ its identity. $R_g:G\rightarrow G$ is the right multiplication $h\mapsto hg$, $L_g$ the left multiplication, and \begin{align*}
+%% ad_g:G\rightarrow G\\
+%% h\mapsto ghg^{-1}                                                                                                                                                                                                                \end{align*}
+%% with derivative in the identity $Ad_g\equiv d(ad_g):\mathfrak{g}\rightarrow \mathfrak{g}$. This defines the \define{adjoint representation of $G$}\begin{align*}                                                                                                                                          
+%% Ad:G\rightarrow \text{Aut }\mathfrak{g}                                                                                                                                                         \end{align*}
+%% By taking the derivative at the identity we get a map $Ad :\mathfrak{g}\rightarrow \text{Der }\mathfrak{g}$, the \define{adjoint representation of $\mathfrak{g}$}.
+%% 
+%% 
+%% A vector field $X\in \mathfrak{X}(G)$ is said to be left-invariant if $(d L_g)X_h=X_{gh}$. The set of left invariant vector fields in $G$ is isomorphic to $\mathfrak{g}=T_e G$ under the correspondence\begin{align*}
+%% \mathfrak{g}\ni X &\mapsto (h\mapsto (dL_h)X)
+%% \end{align*}
+%% 
+%% Much like left invariant vector fields, left invariant forms are uniquely determined by their values in $e$. The canonical $\mathfrak{g}$-valued left invariant form on $G$ is the \define{Maurer-Cartan} form:
+%% \begin{equation}\label{maurercartan}
+%% \theta_g(v)=(L_{g^{-1}})_*v
+%% \end{equation}
+%% 
+%% 
+%% Let $(E,\pi,B)$ be a principal $G$-bundle. The \define{vertical tangent space} of $E$ at $p\in E$, or \define{$V_p E$} is $ker(d_p \pi)\subset T_p E$.
+%% %,or equivalently $T_p(E_{\pi(p)})$.
+%% %%\improve{prove $T_p(B_{\pi(p)})=ker(d\pi)$} 
+%% Also, for all $p$, there is an isomorphism
+%% 
+%% \begin{align*}
+%%  \#:\mathfrak{g}\cong T_e G&\rightarrow V_p E\\
+%% [c(t)]&\mapsto [p.c(t)]\\
+%% \end{align*}
+%% 
+%% It is defined in $V_p E$ since $p.c(t)$ is in $E_{\pi(p)}$ at all times, so $\pi(p.c(t))=\pi(p)$ is constant and therefore
+%% \[
+%%  (d_p\pi)([p.c(t)])=\frac{d}{dt}_{|t=0}(\pi(p.c(t)))=0
+%% \]
+%% 
+%% So given $A\in\mathfrak{g}$ and $p\in E$ we get a vector $A^{\#}_p\in V_p E$, and consequently a vector field $A^\#\in \mathfrak{X}(E)$, the \define{fundamental vector field} generated by $A$. The main property of this field is that, for each $g\in G$,\begin{equation}\label{mainproperty}
+%%                     (ad_{g^{-1}}A)^\#   =(R_g)_*A^{\#}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            \end{equation}
+%% 
+%% \subsubsection{Connections} 
+%% 
+%% Recall that a $k$-dimensional distribution on a manifold $B$ is a map
+%% \[
+%% B\ni x \mapsto D_x \subset T_x B,
+%% \]
+%% where $D_x$ is a k-dimensional vector subspace of $T_x B$ for every $x\in B$. $C^\infty$ distributions are those such that every $x$ has a neighbourhood $U$ where $D_x$ is generated by $k$ smooth vector fields $X_1,\ldots,X_k\in \mathfrak{X}(U)$ \[
+%% D_x=<X_1,\ldots,X_k>                                                                                                                                                   \]
+%% 
+%% % \begin{definition}
+%% % \improve{rewrite in other words, or separate definition, proposition etc}
+%% % A connection on a principal $G$-bundle $\pi:B\rightarrow M$ is ``usually'' one of the following:
+%% % \begin{enumerate}
+%% %  \item (\define{The Ehresmann connection}:) a distribution $H$ in $B$ such that for all $p\in P$
+%% % 	\begin{enumerate}
+%% % 	\item H is \define{horizontal}, ie $T_p P=H_p \oplus T_p(B_{\pi(p)})$
+%% % 	\item H is \define{$G$-invariant}, ie $\forall_{g\in G} H_{ug}=(R_g)_* H_u$, where $R_g:P\rightarrow P$ is the right  multiplication by $g$, $R_g(p)=p.g$.
+%% % 	\end{enumerate}
+%% %  \item (\define{the 1-form of the connection}:) A $1$-form $\omega\in \Omega^1(P,\mathfrak{g})$ such that
+%% % 	\begin{enumerate}
+%% % 	\item $\omega(X^*)=X$ for all $X\in\mathfrak{g}$;
+%% % 	\item $(R_g)^*\omega=Ad(g^{-1})\omega$, for all $g\in G$
+%% % 	\end{enumerate}
+%% %  \item For a cover $\{U_\alpha\}$ of $M$, a set of $1$-forms $\omega_\alpha\in\Omega^1(U_\alpha,\mathfrak{g})$ such that on every $U_\alpha\cap U_\beta$ \[ 
+%% %                          i\omega_\alpha-i\omega_\beta=g_{\alpha\beta}^{-1}dg_{\alpha\beta}
+%% %                                                                                                                                                          \]
+%% % 
+%% % \end{enumerate}
+%% % \end{definition}
+%% % 
+%% % REWRITE
+%% 
+%% A connection on a \emph{principal} $G$-bundle $\pi:E\rightarrow B$ can be defined in many ways. 
+%% 
+%% \begin{definition}
+%% A \define{(principal) Ehresmann connection} is a smooth distribution $H$ in $E$ such that for all $p\in E$
+%% 	\begin{enumerate}
+%% 	\item H is \define{horizontal}, i.e. $T_p E=H_p \oplus V_pE$
+%% 	\item H is \define{$G$-invariant}, i.e. $\forall_{g\in G} H_{ug}=(R_g)_* H_u$, where $R_g:E\rightarrow E$ is the right  multiplication by $g$, $R_g(b)=b.g$.
+%% 	\end{enumerate}
+%% \end{definition}
+%% 
+%% %% \improve{state that the G-invariance condition ensures that if a point $p$ is parallel transported, so %% is its multiple $pg$, with $g\in G$ fixed}
+%% 
+%% %% \question{$C^\infty$ distribution required? What about condition on japanese book that the connection  separates any smooth vector field in 2 smooth components (vertical and horizontal)?}
+%% 
+%% Alternatively we could have defined a connection as a projection $T_p E\rightarrow V_p E\cong \mathfrak{g}$ at each point $p\in E$, or, equivalently, in terms of a connection form as defined below.
+%% 
+%% \begin{definition}
+%% A \define{connection one-form} $\omega$ is an element of $\Omega^1(E,\mathfrak{g})\equiv\Omega^1(E)\otimes \mathfrak{g}$ (the one-forms in $E$ with values in $\mathfrak{g}$), such that \begin{enumerate}
+%%                                                                                                                                                                                          \item $\omega(A^\#)=A$, for all $A\in \mathfrak{g}$
+%% 							\item $R_g^*\omega=Ad_{g^{-1}}\omega$ (ie, $Ad_{g^{-1}}\omega(X)=\omega(d R_g X)$).
+%% 							\end{enumerate}
+%% \end{definition}
+%% 
+%% This gives us a connection in the previous sense, as each connection 1-form gives, at each $p\in E$, a projection \[
+%%                                                                                                               \omega_p:T_p E\rightarrow \mathfrak{g}\cong V_p E
+%%                                                                                                              \]
+%% and so we get a decomposition $T_p E=V_p E\oplus ker\omega_p$ which is equivariant.
+%% 
+%% \begin{prop} Given a connection 1-form $\omega\in\Omega^1(E,\mathfrak{g})$, $H_p=ker(\omega_p)$ is an Ehresmann connection.
+%% \end{prop}
+%% 
+%% Conversely, given an Ehresmann connection one can obtain a connection 1-form.
+%% 
+%% 
+%% % IGNORE:
+%% % 
+%% % Recall that choosing such a decomposition is equivalent to choosing a projection \question{I know why, what is the exact result to just quote?}
+%% % 
+%% % \improve{ $L(U,V)$, the set of linear applications from $U$ to $V$, is equal to $V^*\otimes W$, the set of linear functionals in $V$ with values in $W$} in every $p\in B$ $P_p:T_p E\rightarrow (ker d_p\pi)\cong \mathfrak{g}$
+%% % 
+%% % This is just a $1$-form $\omega$ with values in $\mathfrak{g}$, ie $\omega\in \Omega^1(E,\mathfrak{g})\equiv\Omega^1(E)\otimes \mathfrak{g}$.
+%% % 
+%% % \improve{The following right implication is on the notes, the converse is on koboyashi and the book at home}
+%% % END IGNORE
+%% 
+%% Given a trivialization $(\phi_\alpha,U_\alpha)_\alpha$ we obtain a family of sections $s_\alpha(p)=\phi_\alpha(p,e)$ and consequently a  family of 1-forms $\omega_\alpha=(s_\alpha)^*\omega\in \Omega(U_\alpha,\mathfrak{g})$. These 1-forms are such that on every $U_\alpha\cap U_\beta$
+%% 
+%% \begin{equation}
+%% \label{compat}
+%% \omega_\beta = g_{\alpha\beta}^{-1} \omega_\alpha g_{\alpha\beta}+g_{\alpha\beta}^{-1}dg_{\alpha\beta}
+%% \end{equation}
+%% 
+%% Conversely, any family of 1-forms $\omega_\beta$ obeying (\ref{compat}) defines a unique connection 1-form $\omega\in\Omega^1(P,\mathfrak{g})$ having these as local 1-forms. 
+%% 
+%% Note that for line bundles the compatibility equation ($\ref{compat}$) simplifies to
+%% \begin{equation}
+%%  \label{compat2} \omega_\beta = \omega_\alpha+g_{\alpha\beta}^{-1}dg_{\alpha\beta}
+%% \end{equation}
+%% 
+%% 
+%% % Also \begin{align}
+%% %                                                                           \mathfrak{g} &\rightarrow^{\cong} ker(d_p\pi)\\
+%% % 									  v=[c(t)]\mapsto [p.c(t)]
+%% %                                                                              \end{align}
+%%  
+%%                                                                                                                                                                                                             
+%%                                                                                                                                 
+%% 
+%% 
+%% %%Each provides a choice of the horizontal tangent space of the bundle, ie, a complement of %%$ker(d\pi)=T_p(B_{\pi(p)$\improve{Exercice: prove this equality} in $T_p P$.
+%% 
+%% \subsubsection{Lifting and holonomy}
+%% 
+%% Given a principal $G$-bundle $p:E\rightarrow M$ with connection $\omega$, there is a unique map \begin{align*}
+%% \mathfrak{X}(M)&\rightarrow \mathfrak{X}(E)\\
+%% X &\mapsto \widetilde{X} 
+%% \end{align*}
+%% 
+%% of vector fields (the \define{horizontal lift}), such that \begin{itemize}
+%%                                                              \item $\pi_*(\widetilde{X})=X$, for every $X\in\mathfrak{X}(M)$
+%% 							     \item $\widetilde{X}_u\in T^H_u E$ at every $u\in E$.
+%%                                                             \end{itemize}
+%% This lift is $G$-invariant. That is, $(R_g)_*\widetilde{X}_e=\widetilde{X}_{eg}$ for every $g\in G$.
+%% 
+%% 
+%% Recall that given a loop $\gamma$ in $M$ and a point $u\in E$ over the basepoint of $\gamma$, there is a path $\tilde{\gamma}$ in $E$ such that $\tilde{\gamma}(0)=u$ and the tangent vector of the curve at every point is horizontal. Moreover, fixing $\gamma$ with $\gamma(0)=\gamma(1)=x\in M$, there is a unique smooth correspondence (called the \define{parallel transport})
+%% \[ \mathcal{H}_\omega : [0,1]\times E_x\rightarrow E \]
+%% such that $\frac{d}{dt}\mathcal{H}_\omega (t,u)=\widetilde{\frac{d}{dt}\gamma(t)}$ and $\mathcal{H}_\omega(0,u)=u$. We also write $\mathcal{H}_\omega(\gamma,t,u)=\mathcal{H}_\omega(t,u)$.
+%% 
+%% This correspondence is  equivariant, i.e. $\mathcal{H}_\omega(\gamma,t,ug)=\mathcal{H}_\omega(\gamma,t,u)g$.
+%%  Notice that if $u\in p^{-1}(x)$, then also $\mathcal{H}_\omega(1,u) \in p^{-1}(x)$. This way we get a correspondence 
+%% \begin{align*}
+%%  \Omega(M)\rightarrow G
+%% \end{align*}
+%% that to a loop $\gamma$ in $M$ associates the only $g\in G$ such that $\widetilde{\gamma}(0)=\widetilde{\gamma}(1)g$. 
+%% 
+%% We call this map the \define{holonomy} (at $u$) of the connection $\omega$. Its image is a subgroup \index{$\text{Hol}$} $\text{Hol}(u)\subset G$, the \define{holonomy group of $\omega$ with reference point $u$}. We often ignore its dependence on $u$ since \begin{itemize}
+%% \item the holonomy groups are \emph{conjugate} in $G$: if $v=ug$ then $\text{Hol}(v)=ad(g^{-1})\cdotp\text{Hol}(u)$,
+%% \item any two points which are joined by an horizontal curve, have the same holonomy group.                                                                                                                                                                                                                                                          \end{itemize}
+%% 
+%% 
+%% 
+%% Let \define{$E(u)$} denote the set of points in $E$ that are connected to $u$ by an horizontal path.
+%% \begin{theorem}[Reduction theorem]\index{Reduction theorem}\label{redthm}
+%% $E(u)$ is a reduced bundle with structure group $\text{Hol }(u)$.
+%% \end{theorem}
+%% 
+%% \future{\improve{WAIT until read Picken's categorical holonomy}}
+%% 
+%% \begin{theorem}[Ambrose-Singer]\label{ambrosesinger}
+%% $\text{Hol(u)}$ is a Lie subgroup of $G$ with Lie algebra equal to the subspace of $\mathfrak{g}$ generated by the image of $\Omega_v$, the curvature form at all points $v\in E(u)$.
+%% \end{theorem}
+%% 
+%% 
+%% \section{2-Bundles}
+%% 
+%% \begin{definition}
+%% A \define{2-category}, or a \define{strict 2-category}, consists of a category $C$, together with \begin{enumerate}
+%%  \item categories $T(a,b)$ for all objects $a,b\in C_0$, where the objects of the category $T(a,b)$ are the morphisms in $C$ from $a$ to $b$,
+%% \item a functor $F_{a,b,c}:T(b,c)\times T(a,b)\rightarrow T(a,c)$, for each triple of objects $a,b,c$ (the \define{horizontal composition}, denoted by $\circ$), that acts on objects as the usual composition of morphisms, is associative and satisfies the unity axioms (see below),
+%% \item for each object $a$, a functor $U_a:1\rightarrow T(a,a)$, where $1$ is the terminal category (assigning to the single object of $1$ the identity morphism in $T(a,a)$).
+%% \end{enumerate}
+%% Similarly one defines 2-functors and 2-natural transformations between 2-functors.
+%% \end{definition}
+%% 
+%% 
+%% \begin{definition}
+%%  Let $K$ be a (finitely complete) category. An \define{internal category} in $K$ (also called a \define{category object} in $K$, or just \define{category in $K$}) is a tuple $C$ consisting of:
+%% \begin{itemize}
+%%  \item an object $Ob(C)\in K_0$,
+%% \item an object $Mor(C)\in K_0$,
+%% \item morphisms $s,t:Mor(C)\rightarrow Ob(C)$  in $K_1$ (called the \define{source} and \define{target} morphisms),
+%% \item a composition morphism $Mor(C) {{}_s\times_t} Mor(C)\rightarrow Mor(C)$ in $K_1$,
+%% \item an identity morphism $Ob(C)\rightarrow Mor(C)$,
+%% \end{itemize}
+%% satisfying the usual rules of categories. Alternatively we could only require that in $K$ the above pullbacks and products exist in $K$. One can similarly define functors and natural transformations in $K$. These are the objects, morphisms and 2-morphisms of a 2-category respectively, denoted $KCat$. In particular, we define a 2-space as an internal category in (a slight modification of) $C^\infty$
+%% \end{definition}
+%% 
+%% \begin{definition}
+%%  A \define{$2$-bundle} consists of 2-spaces $E$ and $B$ together with a smooth map $p:E\rightarrow B$.
+%%   Let $F$ be a smooth 2-space. A \define{locally trivial 2-bundle with fibre F} is a 2-bundle $p:E\rightarrow B$ together with an open cover $\{U_i\}$ of $B$ and smooth equivalences $\xymatrix{E_{|U_i}\ar[r]^{t_i} & U_i\times F}$ such that the diagrams
+%% \begin{equation}    \label{commute2}
+%%  \xymatrix{E_{|U_i}\ar[rr]^{t_i} \ar[dr]^{p} & & U_i\times F \ar[dl]\\
+%% & U_i & }
+%% \end{equation}
+%% 
+%% commute. We call the $t_i$'s the \define{local trivializations}.
+%% \end{definition}
+%% 
+%% \begin{definition}
+%%  A \define{crossed module} is a quadruple $\mathcal{G}=(H,G,\partial:H\rightarrow G,\vartriangleright)$ where $H,G$ are groups, $\vartriangleright:G\rightarrow \text{Aut}(H)$ is a left action of $G$ on $H$ and $\partial:H\rightarrow G$ is an equivariant group morphism, ie
+%% \[
+%%  \partial (g\vartriangleright h)=g\partial(h)g^{-1}\qquad \text{for all }g\in G,h\in H
+%% \]
+%% and we also require the \define{Peiffer identity}:
+%% 
+%% \[\partial(e)\vartriangleright h=ehe^{-1} \qquad \text{for all }e,h\in H.\]
+%% When $H$ and $G$ are Lie groups and $\partial,\vartriangleright$ are smooth, $\mathcal{G}$ is said to be a \define{Lie crossed module}.
+%% \end{definition}
+%% 
+%% 
+%% \begin{theorem}
+%%  Let $p:E\rightarrow B$ be a principal $\mathcal{G}$-2-bundle, locally trivial over an open cover $\{U_i\}$. Suppose that $k_i=1$. Let $(G,H,\partial,\vartriangleright)$ be the Lie crossed module associated to $\mathcal{G}$, with differential Lie crossed module $(\mathfrak{g},\mathfrak{h},\partial,\vartriangleright)$.
+%% 
+%% Then there is a one-to-one correspondence between 2-connections on $E$ and differential forms $(A_i,B_i,a_{ij})\in \Omega^1(U_i,\mathfrak{g})\times \Omega^2(U_i,\mathfrak{h})\times \Omega^1(U_{ij},\mathfrak{h})$ such that:
+%% \begin{enumerate}
+%%  \item \label{fakec} $F_{A_i}+\partial(B_i)=0$, where $F_{A_i}=dA_i+A_i\wedge A_i$ (the \define{curvature 2-form} of $A_i$).
+%% \item $A_i=g_{ij}A_jg_{ij}^{-1}+g_{ij}dg_{ij}^{-1}-\partial (a_{ij})$
+%% \item $B_i=g_{ij}\vartriangleright B_j+k_{ij}$ where $k_{ij}=da_{ij}+a_{ij}\wedge a_{ij}+d\alpha (A_i)\wedge a_{ij}$
+%% \item $a_{ij}+g_{ij}\vartriangleright a_{jk}=h_{ijk}a_{ik}h_{ijk}^{-1}+(dh_{ijk})h_{ijk}^{-1}+(A_i\vartriangleright h_{ijk})h_{ijk}^{-1}$
+%% \end{enumerate}
+%% \end{theorem}
+\section{Categorical connections}
+\begin{definition}
+ A \define{crossed module} is a quadruple $\mathcal{G}=(H,G,\partial:H\rightarrow G,\vartriangleright)$ where $H,G$ are groups, $\vartriangleright:G\rightarrow \text{Aut}(H)$ is a left action of $G$ on $H$ and $\partial:H\rightarrow G$ is an equivariant group morphism, ie
+\[
+ \partial (g\vartriangleright h)=g\partial(h)g^{-1}\qquad \text{for all }g\in G,h\in H
+\]
+and we also require the \define{Peiffer identity}:
+
+\[\partial(e)\vartriangleright h=ehe^{-1} \qquad \text{for all }e,h\in H.\]
+When $H$ and $G$ are Lie groups and $\partial,\vartriangleright$ are smooth, $\mathcal{G}$ is said to be a \define{Lie crossed module}.
+\end{definition}
+
+A particular kind of 2-connection is the following.
+\begin{definition}
+ Let $\mathcal{G}=(\partial :H\rightarrow G,\vartriangleright)$ be a crossed module, with associated differential crossed module $\mathfrak{G}=(\partial:\mathfrak{h}\rightarrow \mathfrak{g},\vartriangleright)$. A \define{$\mathcal{G}$-categorical connection} on a principal $G$-bundle $p:E \rightarrow B$ is a pair $(m,\omega)$ where $\omega\in \Omega^1(E,\mathfrak{g})$ is a connection 1-form on $E$ and $m$ is an equivariant horizontal 2-form in $\Omega^2(E,\mathfrak{h})$, such that
+\begin{equation}
+\partial (m)=\Omega \label{vanish}
+\end{equation}
+\end{definition}
+
+For instance, let $\mathcal{G}=(\text{id}:G\rightarrow G,\vartriangleright)$, where $\vartriangleright$ is the adjoint action of $G$ on $G$.
+
+Let $p:E\rightarrow B$ be principal $G$-bundle with connection one-form $\omega$. Then $(\omega,m)$ is a $\mathcal{G}$-categorical connection, where $m=\Omega$ is the curvature 2-form of $\omega$.                                         
+
+\subsection{Categorical connections as bundle sections}
+\begin{definition}\label{tensdef}
+Let $(E,p,B)$ be a principal $G$-bundle. Let $(\rho,V)$ be a representation of $G$ in a finite dimensional vector space $V$. A \define{tensorial form} of degree $k$ on $E$ of type $(\rho,V)$ is a form $\varphi\in\Omega^k (E,V)$ such that
+\begin{itemize}
+\item $\varphi$ is $G$-invariant for the induced action of $G$ on $V$, i.e. $R_g^*=\rho(g^{-1})\varphi$,
+\item $\varphi$ is horizontal, i.e. $\varphi(X_1,\ldots,X_k)=0$ when one of the tangent vectors $X_i$ is vertical.
+\end{itemize}
+\end{definition}
+
+A connection $\omega$ is a tensorial form of degree 1 in $E$ of type $(\text{Ad},\mathfrak{g})$. By definition, $m$ is a tensorial form of degree 2 in $E$ of type $(\vartriangleright,\mathfrak{h})$. From \cite{kobayashi1}:
+
+\begin{lemma}\label{tensorialform}
+Let $(E',q,B)$ be the bundle associated with the principal $G$-bundle $(E,p,B)$ with fibre $V$, where $G$ acts naturally by $\rho$. There is a one-to-one correspondence between the tensorial forms as in Definition \ref{tensdef} and sections of the bundle \[
+\xymatrix{\wedge^k T^*B\otimes E' \ar[d]\\
+B} \]
+\end{lemma}
+
+\subsection{Existence}
+A connection 1-form on any bundle can always be found by the means of partitions of unity, our problem lies with the form $m$. Our main result is the following:
+
+\begin{theorem}\label{mainthm}
+Let $\xi=(E,p,B)$ be a principal $G$-bundle, and let $\mathcal{G}=(\partial:H\rightarrow G)$ a Lie crossed module. The following are equivalent:
+\begin{enumerate}
+\item There is a $\mathcal{G}$-categorical connection on $\xi$. \label{1}
+\item $\xi$ admits a connection with curvature $2$-form $\Omega$ such that $\text{Im}(\Omega)\subset \mathfrak{a}$, where $\mathfrak{a}=\text{Im }\partial$ \index{$\mathfrak{a}$}.\label{2}
+\item $\xi$ admits a reduction to a structure group $G'\subset G$, with Lie algebra $\mathfrak{g}'$ contained in $\mathfrak{a}$. \label{3}
+\end{enumerate}
+\end{theorem}
+
+\begin{corollary}
+ In the conditions of Theorem \ref{mainthm}, if $\partial:\mathfrak{e}\rightarrow \mathfrak{g}$ is surjective there is always a categorical connection on a bundle with structure group $G$.
+\end{corollary}
+
+To prove the Theorem \ref{mainthm}, note that $\footnotesize{(1)\Rightarrow (2)}$ follows by definition, whereas $\footnotesize{(2)\Rightarrow (3)}$ and $\footnotesize{(3)\Rightarrow (1)}$ follow by the Ambrose-Singer theorem and $\footnotesize{(2)\Rightarrow (1)}$. For the latter, we described the categorical connection as sections of a particular bundle. Then our problem reduces to obtaining an equivariant right section of a surjective bundle morphism, which is always possible.
+
+
+
+\begin{subsection}{Example of non-existence}
+ Let $(H,.)=(\mathbb{R}^n,+)$ and $(G,.)=(GL(n,\mathbb{R}),\circ)$. Take the trivial map $\partial:H\rightarrow G$ together with the action $f\vartriangleright e=f(e)$ of $GL(n,\mathbb{R})$ in $\mathbb{R}^n$. Clearly $\mathcal{G}=(\partial:H\rightarrow G,\vartriangleright)$ is a crossed module. Since $\partial:\mathfrak{h}\rightarrow \mathfrak{g}$ is the zero map, in order for there to be a categorical connection, the holonomy group would have to be a discrete subgroup of $G$. But in general that is not the case: take for instance the frame bundle over $S^2$, with $G=GL(2,\mathbf{R})$ and $H=(\mathbf{R}^2,+)$. If the frame bundle could be reduced to a discrete group then it would be trivial as, for any topological group, principal $G$-bundles over $S^2$ are classified by conjugacy classes in $\pi_1(G)$. In particular there would be a section of the frame bundle and hence a nowhere vanishing tangent vector field to $S^2$ which is impossible by the hairy ball theorem.
+\end{subsection}
+
+%% \begin{thebibliography}{100}
+%% 
+%% \bibitem{number1} % para mudar, obviamente ;-)
+%% J.~Seixas, \textit{The Art of Thesing}, DFIST Press, Lisboa 2009.
+%% \bibitem{number2} % para mudar, obviamente ;-)
+%% J.~Seixas, \textit{Yet Another Art of Thesing}, DFIST Press, Lisboa 2009.
+%% \bibitem{faria}
+%% J. Martins, R. Picken, \textit{On Two-Dimensional Holonomy}, Trans. Amer. Math. Soc. Vol. 362 (5657-5695), 2010.
+%% 
+%% %\setcounter{enumiv}{100}
+%% \end{thebibliography}
+
+\addcontentsline{toc}{chapter}{Bibliography}
+\nocite{*}
+\bibliographystyle{alpha}
+\bibliography{bibliography-summary}  
+
+%\end{multicols}
+\end{document}

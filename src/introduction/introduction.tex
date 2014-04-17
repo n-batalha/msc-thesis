@@ -1,0 +1,56 @@
+
+Gauge theory is a mathematical theory that describes the evolution of the state of point particles. Recently, in physics, the need to describe the evolution of more complicated objects such as strings has led to the development of the new field of higher gauge theory.
+
+In this thesis we will give an overview of this field with particular focus on the special case of categorical connections and holonomies which have recently been introduced by Martins and Picken.
+
+In \textbf{Section 1}, we review the basic concepts necessary for the remaining chapters. We begin by introducing 2-categories, which are basically categories together with ``morphisms of morphisms''. Notice that in regular categories one can talk of \emph{isomorphisms} between objects using arrows, however one can only discuss \emph{equalities} of morphisms as elements in a set. By introducing morphisms of morphisms, a notion of isomorphism of arrows is naturally introduced, leaving only the equality relation on $2$-morphisms.
+
+Using this notion of isomorphism of arrows, we could also extend, say, the associativity relation of the composition rule to an equality \emph{up to isomorphism}. This would lead us to \define{weak  2-categories} (or bicategories) as in \cite{maclane} and \cite{ncatsbaez}. As shown in this last paper, these provide a more natural framework than strict categories, but at the time of writing there isn't either a well established definition of what a weak $n$-category (for $n\geq 3$), nor for that matter, what a 2-bundle with a such a weak group is. Here, we will consider only \emph{strict} 2-categories.
+
+$n$-Categories are closely related to the theory of Categorification (\cite{categorification}). Quoting  Baez and Dolan:
+\begin{quote}
+ Categorification is the process of finding category-theoretic analogs
+of set-theoretic concepts by replacing sets with categories, functions with functors, and equations between functions by natural isomorphisms between functors, which in turn should satisfy certain equations of their own, called ``coherence laws''. Iterating this process requires a theory of ``n-categories'', algebraic structures having objects, morphisms between objects, 2-morphisms between morphisms and so on up to n-morphisms.
+\end{quote}
+
+Our main goal is to study categorifications of bundles with connections, which we review in \textbf{Section 2} without proofs.
+
+In \textbf{Section 3} we begin by introducing the construction of $2$-bundles with connection by Baez and Schreiber (\cite{baez-2004}), as in their introductory paper \cite{baezhigher}. Following the instructions above, a categorification of a bundle should be a functor $p:E\rightarrow B$ between some categories $E$ and $B$. This leads us to a structure ``2-group'' $G$. These should still have some differentiable structure, with an added group like structure in $G$. Baez's approach uses the concept of internal category by Ehresmann (\cite{ehresmann}), wherein given a category $K$, we write the axioms for the algebraic structure present in a category in terms of commutative diagrams and interpret these in $K$.
+
+%%roughly a category whose objects and morphisms are objects in another category. 
+% 
+% These internal categories together with ``internal'' functors and natural transformations form a 2-category. Also, since a group can be thought as category $\mathcal{G}$ with one object and invertible morphisms, by categorifying it we get a 2-category. 
+
+Coincidentally this abstract construction leads to a natural way of describing certain concepts which are important in string theory, much in the way that bundles and connections are used to describe classical physics. Whereas holonomy assigned to each path of a particle a group element $g$, or in categorical terms a morphism 
+\[
+ \xymatrix{ \bullet \ar@/^1pc/[r]^g & \bullet}
+\]
+our categorified holonomy (or 2-connection) will be a functor assigning to both paths and ``surfaces'' (say the area swept by a 1-dimensional string) a morphism and a 2-morphism in our 2-group
+
+\[
+ \xymatrix{ \bullet \ar@/^1pc/[rr]^{g}_{}="0"
+           \ar@/_1pc/[rr]_{g'}="1"
+           \ar@{=>}"0";"1"^{h} && \bullet}
+\]
+The foremost examples for physics have been very recently described in \cite{baezinvitation}. 
+%Bundle-gerbes are another categorification of bundles carried by Murray (\cite{murray1,murray2}) not introduced here, built specifically to obtain objects \notsure{more directly usable in physics}.
+
+We briefly mention the particular case of gerbs, which were studied in \cite{chatterjee} as a categorification of the cocycle condition that defines isomorphism classes of line bundles. This in turn is a particular case of the original construction of Giraud \cite{giraud}, and later Brylinski \cite{brylinski}.
+
+Then we move on to a particular type of 2-connections, the categorical connections. Here lies the original part of this work, where we answer a question left open in \cite{picken_faria}. We study the existence of categorical connections in a given bundle and crossed module, by essentially describing categorical connections as sections in an associated vector bundle. 
+This section can be read as an \emph{intermezzo} to the above article of Martins and Picken, who then proceed to construct categorical holonomies for each categorical connection. With this work, a criteria for the existence of categorical holonomies from categorical connections is immediate.
+% 
+% We take no credit
+% 
+% \improve{meter: we take no credit in sections (...) which we borrowed from ... for a short introduction.}
+% \improve{finish this in the end}
+
+\subsubsection*{Requisites} General Topology, Basic Category Theory and Differential Geometry.
+
+\subsubsection*{Notation} We write $U_{i_1,\ldots,i_k}= U_{i_1}\cap\ldots \cap U_{i_k}$ with each $U_i$ open. By neighborhood we always mean an open neighborhood. When $G, H, \ldots$ are Lie groups, we denote the corresponding Lie algebras by $\mathfrak{g},\mathfrak{h}, \ldots$. For a category $C$, we denote $C_0$ its class of objects and $C_1$ its class of morphisms. By \define{$\textbf{Diff}$} we mean the category of smooth manifolds with smooth maps, which in turn we simply call spaces and maps. Often we write the composition of arrows from left to right, that is if $f:A\rightarrow B$ and $g:B\rightarrow C$ are composible morphisms, we denote the composition by $f\circ g$.
+
+\subsubsection*{Assumptions}
+
+The manifolds used here are assumed to be Hausdorff and second-countable.
+
+

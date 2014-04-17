@@ -1,0 +1,208 @@
+\documentclass[10pt,twoside]{book}
+\usepackage[a4paper]{anysize}
+\usepackage[portuguese, english]{babel}
+\usepackage[ansinew,utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsthm,amsfonts,mathrsfs,cite,color,enumerate,epsfig,yfonts,fancyhdr,graphicx,makeidx,textcomp}
+\usepackage[all]{xy}
+% \usepackage{draftwatermark}
+
+\usepackage{hyperref}
+\hypersetup{
+%     bookmarks=true,         % show bookmarks bar?
+%     bookmarksnumbered=true,
+    unicode=true,          % non-Latin characters in Acrobat’s bookmarks
+%     pdftoolbar=true,        % show Acrobat’s toolbar?
+%     pdfmenubar=true,        % show Acrobat’s menu?
+%    pdffitwindow=false,     % window fit to page when opened
+    pdfstartview={FitH},    % fits the width of the page to the window
+    pdftitle={On the existence of categorical connections},    % title
+    pdfauthor={Nelson Batalha},     % author
+    pdfsubject={Differential Geometry},   % subject of the document
+%    pdfcreator={Creator},   % creator of the document
+%    pdfproducer={Producer}, % producer of the document
+%    pdfkeywords={keywords}, % list of keywords
+    pdfnewwindow=false,      % links in new window
+    colorlinks=false,       % false: boxed links; true: colored links
+    linkcolor=black,          % color of internal links
+    citecolor=black,        % color of links to bibliography
+    filecolor=black,      % color of file links
+    urlcolor=black           % color of external links
+}
+
+
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}%[chapter]
+\newenvironment{proof2}{\noindent {\sc Proof:}}{$\,\hfill \Box$\smallskip}
+
+\newtheorem{step}{Step}
+
+\def\of #1{\!\left({#1}\right)}
+\def\hol {{\rm hol}}
+
+\newcommand{\fpartial}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\towrite}{\begin{center}{\Large $\clubsuit$ Section not yet written
+$\clubsuit$ } \end{center}}
+\newcommand{\tofinish}{\begin{center} {\Large $\spadesuit$ Section not yet
+finished $\spadesuit$}\end{center}}
+\newcommand{\notsure}[1]{\emph{#1}\footnote{$\clubsuit$CONFIRM$\clubsuit$}}
+\newcommand{\improve}[1]{\begin{center}
+                         \begin{tabular}{|p{8cm}|}
+\hline
+\textbf{TO DO}: \textsc{#1}\\
+\hline
+\end{tabular}
+                         \end{center}}
+%\newcommand{\future}[1]{{\color{red} #1}}
+\newcommand{\future}[1]{}
+\newcommand{\question}[1]{\begin{center}
+                         \begin{tabular}{|p{8cm}|}
+\hline
+\textbf{\textsc{Q}}: {\color{red} \textsc{#1}}\\
+\hline
+\end{tabular}
+                         \end{center}}
+\newcommand{\squestion}[1]{\footnote{$\clubsuit\spadesuit$#1$\clubsuit\spadesuit$}}
+\newcommand{\define}[1]{\index{#1}\emph{#1}}
+\newcommand{\mention}[1]{\index{#1} \emph{#1}}
+
+
+
+
+%% \SetWatermarkFontSize{10cm}
+%% \SetWatermarkScale{4}
+%% \SetWatermarkLightness{0.95}
+
+
+
+\makeindex
+
+\begin{document}
+\shorthandoff{"} % Hack to run babel portuguese and xypic
+
+\thispagestyle{empty}
+\selectlanguage{portuguese}
+\begin{figure}[t]
+\begin{picture}(90,23)(0,0)
+
+  \put(-30,5){\includegraphics[scale=0.584]{figures/istsymbol.pdf}}
+
+\end{picture}
+ 
+\end{figure}
+
+\vspace*{1cm}
+
+
+\begin{center}
+
+\mbox{{\LARGE \textbf{On the existence of categorical connections}  }}
+\vspace{0.2cm} 
+
+%\mbox{{\LARGE \textbf{Minimum Energy Estimator}  }}
+\vspace{0.3cm} 
+
+\vspace{3cm}
+
+\mbox{\bf {\Large Nelson Batalha}}\\
+
+
+\vspace{4cm}
+
+\mbox{\LARGE Dissertação para obtenção do Grau de Mestre em}\\
+\vspace{0.3cm}
+\mbox{\bf {\LARGE Matemática e Aplicações}}\\
+
+
+\vspace{3cm}
+
+\mbox{\textbf{\Large Júri}}
+\end{center}
+
+
+\vspace{-0.3cm}
+
+
+\begin{table}[h]
+\begin{tabular}{l l l}
+&\large Presidente: &\large Prof. Dr. Rui Loja Fernandes \\
+&\large Orientador: &\large Prof. Dr. Gustavo Rui de Oliveira Granja \\
+&\large Vogais: &\large Prof. Dr. Roger Francis Picken \\
+&\large \phantom{Vogais:} &\large Prof. Dr. João Nuno Gonçalves Faria Martins  \\
+\end{tabular}
+\end{table}
+
+
+\vspace*{-0.3cm}
+
+\begin{center}
+\textbf{{\large Julho de 2010}}
+\end{center}
+
+
+
+
+\thispagestyle{empty}
+
+
+\newpage
+\thispagestyle{empty}
+\mbox{$\,$}
+\newpage
+\thispagestyle{empty}
+$\,$
+\vskip7.3cm
+\begin{flushright}
+\emph{The universe is full of magical things, patiently waiting for our wits to grow sharper}\\
+Eden Philpotts
+\end{flushright}
+
+\frontmatter
+\selectlanguage{english}
+\include{acknowledgements/acknowledgements}
+\selectlanguage{english}
+\include{abstract/abstract}
+\selectlanguage{portuguese}
+\include{abstract/resumo}
+\selectlanguage{english}
+\newpage
+%\include{notation/notation}
+
+
+%\listoffigures
+%\listoftables
+
+\newpage
+
+\selectlanguage{english}
+ \setcounter{tocdepth}{2}
+\tableofcontents
+\addcontentsline{toc}{chapter}{Index}
+
+\newpage
+\mainmatter
+
+%\include{sites/sites}
+\chapter*{Introduction}
+\input{introduction/introduction}
+\chapter{Prerequisites}
+\input{chapters/1prerequisites}
+\chapter{Gauge Theory}
+\input{chapters/2gauge}
+\chapter{Higher Gauge Theory}
+\input{chapters/3hgt}
+
+\addcontentsline{toc}{chapter}{Bibliography}
+\nocite{*}
+\bibliographystyle{alpha}
+\bibliography{bibliography}  
+
+\printindex
+	
+ 
+\end{document}
