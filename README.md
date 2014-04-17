@@ -1,26 +1,20 @@
-msc-thesis
+MSc thesis
 ==========
 
-# MSc thesis
-
-nelson.batalha@ist.utl.pt
-
-# Requirements
+## Requirements
 
 See used packages in src/{thesis.tex,summmary.tex}
 
-# Compilation
+## Compilation
 
 Type in the current directory:
 
-`` bash
+```bash
 ./build.sh
-``
+```
 
-pdf will be made at the bin directory
+Make sure the build script is executable:
 
-Make sure build is executable with:
-
-`` bash
+```bash
 chmod u+x build.sh
-``
+```
