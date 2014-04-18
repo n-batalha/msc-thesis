@@ -3,18 +3,14 @@ MSc thesis
 
 ## Requirements
 
-See used packages in src/{thesis.tex,summmary.tex}
+See packages used in `src/{thesis.tex,summmary.tex}`
 
 ## Compilation
 
 Type in the current directory:
 
 ```bash
-./build.sh
+sh build.sh
 ```
 
-Make sure the build script is executable:
-
-```bash
-chmod u+x build.sh
-```
+Docs will be at `bin/`
