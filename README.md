@@ -1,11 +1,15 @@
 MSc thesis
-==========
+========== 
 
-## Requirements
+Version in pdf provided in `bin/`
+
+## From source
+
+### Requirements
 
 See packages used in `src/{thesis.tex,summmary.tex}`
 
-## Compilation
+### Build
 
 Type in the current directory:
 
